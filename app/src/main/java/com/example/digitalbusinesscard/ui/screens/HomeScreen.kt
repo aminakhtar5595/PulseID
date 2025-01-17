@@ -1,13 +1,16 @@
 package com.example.digitalbusinesscard.ui.screens
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ShoppingCart
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -17,12 +20,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.digitalbusinesscard.R
 
 @Composable
 fun HomeScreen(name: String) {
@@ -46,38 +47,54 @@ fun HomeScreen(name: String) {
                     text = "Muhammad Amin Akhtar",
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
-                    fontFamily = FontFamily.Monospace
+                    fontFamily = FontFamily.Monospace,
+                    modifier = Modifier
+                        .padding(bottom = 5.dp)
                 )
 
                 Text(
                     text = "Senior Software Engineer",
-                    fontFamily = FontFamily.Monospace
+                    fontFamily = FontFamily.Monospace,
+                    modifier = Modifier
+                        .padding(bottom = 5.dp)
                 )
 
                 Text(
                     text = "Dastgyr",
-                    fontFamily = FontFamily.Monospace
+                    fontFamily = FontFamily.Monospace,
+                    modifier = Modifier
+                        .padding(bottom = 10.dp)
                 )
 
                 Row {
-//                    Text(
-//                        text = "Icon"
-//                    )
+                    Icon(
+                        imageVector = Icons.Filled.Phone,
+                        contentDescription = "Email Icon",
+                        modifier = Modifier
+                            .size(18.dp)
+                    )
 
                     Text(
                         text = "+923001234567",
-                        fontFamily = FontFamily.Monospace
+                        fontFamily = FontFamily.Monospace,
+                        modifier = Modifier
+                            .padding(start = 10.dp, bottom = 10.dp)
                     )
                 }
 
                 Row {
-                    Text(
-                        text = "Icon"
+                    Icon(
+                        imageVector = Icons.Filled.Email,
+                        contentDescription = "Email Icon",
+                        modifier = Modifier
+                            .size(18.dp)
                     )
 
                     Text(
                         text = "dummy@gmail.com",
-                        fontFamily = FontFamily.Monospace
+                        fontFamily = FontFamily.Monospace,
+                        modifier = Modifier
+                            .padding(start = 10.dp)
                     )
                 }
             }
@@ -86,24 +103,22 @@ fun HomeScreen(name: String) {
             modifier = Modifier
                 .height(10.dp)
         )
-        Button(
-            onClick = {},
+        Row (
             modifier = Modifier
                 .fillMaxWidth(),
-
+            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Text(text = "Create Card")
-        }
+            Button(
+                onClick = {},
 
-        Spacer(modifier = Modifier
-            .padding(5.dp))
+                ) {
+                Text(text = "Create Card")
+            }
 
-        Button(onClick = {  },
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            Text(text = "Share Card")
+            Button(onClick = {  },
+            ) {
+                Text(text = "Share Card")
+            }
         }
     }
-    
 }
