@@ -69,7 +69,7 @@ fun HomeScreen(name: String) {
                 Row {
                     Icon(
                         imageVector = Icons.Filled.Phone,
-                        contentDescription = "Email Icon",
+                        contentDescription = "Phone",
                         modifier = Modifier
                             .size(18.dp)
                     )
@@ -110,7 +110,6 @@ fun HomeScreen(name: String) {
         ) {
             Button(
                 onClick = {},
-
                 ) {
                 Text(text = "Create Card")
             }
