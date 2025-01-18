@@ -24,9 +24,10 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun HomeScreen(name: String) {
+fun HomeScreen(navController: NavController) {
     Column (
         modifier = Modifier
             .padding(20.dp)
