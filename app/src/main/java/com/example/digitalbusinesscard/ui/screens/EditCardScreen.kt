@@ -16,11 +16,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.digitalbusinesscard.ui.viewmodels.BusinessCardViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditCardScreen (navController: NavController) {
-    var fullName by remember { mutableStateOf("") }
+
+    var fullName by remember { mutableStateOf("")}
+    var jobTitle by remember { mutableStateOf("")}
+    var company by remember { mutableStateOf("")}
+    var phoneNumber by remember { mutableStateOf("")}
+    var email by remember { mutableStateOf("")}
 
     Column (
         modifier = Modifier
@@ -39,8 +45,8 @@ fun EditCardScreen (navController: NavController) {
         )
 
         OutlinedTextField(
-            value = fullName,
-            onValueChange = { fullName = it },
+            value = jobTitle,
+            onValueChange = { jobTitle = it },
             label = { Text("Job Title") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -52,8 +58,8 @@ fun EditCardScreen (navController: NavController) {
         )
 
         OutlinedTextField(
-            value = fullName,
-            onValueChange = { fullName = it },
+            value = company,
+            onValueChange = { company = it },
             label = { Text("Company") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -65,8 +71,8 @@ fun EditCardScreen (navController: NavController) {
         )
 
         OutlinedTextField(
-            value = fullName,
-            onValueChange = { fullName = it },
+            value = phoneNumber,
+            onValueChange = { phoneNumber = it },
             label = { Text("Phone Number") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -78,8 +84,8 @@ fun EditCardScreen (navController: NavController) {
         )
 
         OutlinedTextField(
-            value = fullName,
-            onValueChange = { fullName = it },
+            value = email,
+            onValueChange = { email = it },
             label = { Text("Email") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -91,7 +97,7 @@ fun EditCardScreen (navController: NavController) {
         )
 
         Button(
-            onClick = {},
+            onClick = { navController.navigate("homeScreen/$fullName/$jobTitle/$company/$phoneNumber/$email") },
             modifier = Modifier
                 .fillMaxWidth()
             ) {

@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController, fullName: String, jobTitle: String, company: String, phoneNumber: String, email: String) {
     Column (
         modifier = Modifier
             .padding(20.dp)
@@ -45,7 +45,7 @@ fun HomeScreen(navController: NavController) {
                     .padding(15.dp)
             ) {
                 Text(
-                    text = "Muhammad Amin Akhtar",
+                    text = fullName,
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     fontFamily = FontFamily.Monospace,
@@ -54,14 +54,14 @@ fun HomeScreen(navController: NavController) {
                 )
 
                 Text(
-                    text = "Senior Software Engineer",
+                    text = jobTitle,
                     fontFamily = FontFamily.Monospace,
                     modifier = Modifier
                         .padding(bottom = 5.dp)
                 )
 
                 Text(
-                    text = "Dastgyr",
+                    text = company,
                     fontFamily = FontFamily.Monospace,
                     modifier = Modifier
                         .padding(bottom = 10.dp)
@@ -76,7 +76,7 @@ fun HomeScreen(navController: NavController) {
                     )
 
                     Text(
-                        text = "+923001234567",
+                        text = phoneNumber,
                         fontFamily = FontFamily.Monospace,
                         modifier = Modifier
                             .padding(start = 10.dp, bottom = 10.dp)
@@ -92,7 +92,7 @@ fun HomeScreen(navController: NavController) {
                     )
 
                     Text(
-                        text = "dummy@gmail.com",
+                        text = email,
                         fontFamily = FontFamily.Monospace,
                         modifier = Modifier
                             .padding(start = 10.dp)
@@ -110,7 +110,7 @@ fun HomeScreen(navController: NavController) {
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             Button(
-                onClick = {},
+                onClick = { navController.popBackStack() },
                 ) {
                 Text(text = "Create Card")
             }
