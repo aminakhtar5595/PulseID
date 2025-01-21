@@ -25,9 +25,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.digitalbusinesscard.ui.viewmodels.BusinessCardViewModel
 
 @Composable
-fun HomeScreen(navController: NavController, fullName: String, jobTitle: String, company: String, phoneNumber: String, email: String) {
+fun HomeScreen(navController: NavController, viewModel: BusinessCardViewModel) {
     Column (
         modifier = Modifier
             .padding(20.dp)
@@ -45,7 +46,7 @@ fun HomeScreen(navController: NavController, fullName: String, jobTitle: String,
                     .padding(15.dp)
             ) {
                 Text(
-                    text = fullName,
+                    text = viewModel.fullName,
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     fontFamily = FontFamily.Monospace,
@@ -54,14 +55,14 @@ fun HomeScreen(navController: NavController, fullName: String, jobTitle: String,
                 )
 
                 Text(
-                    text = jobTitle,
+                    text = viewModel.jobTitle,
                     fontFamily = FontFamily.Monospace,
                     modifier = Modifier
                         .padding(bottom = 5.dp)
                 )
 
                 Text(
-                    text = company,
+                    text = viewModel.company,
                     fontFamily = FontFamily.Monospace,
                     modifier = Modifier
                         .padding(bottom = 10.dp)
@@ -76,7 +77,7 @@ fun HomeScreen(navController: NavController, fullName: String, jobTitle: String,
                     )
 
                     Text(
-                        text = phoneNumber,
+                        text = viewModel.phoneNumber,
                         fontFamily = FontFamily.Monospace,
                         modifier = Modifier
                             .padding(start = 10.dp, bottom = 10.dp)
@@ -92,7 +93,7 @@ fun HomeScreen(navController: NavController, fullName: String, jobTitle: String,
                     )
 
                     Text(
-                        text = email,
+                        text = viewModel.email,
                         fontFamily = FontFamily.Monospace,
                         modifier = Modifier
                             .padding(start = 10.dp)

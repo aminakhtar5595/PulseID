@@ -1,25 +1,21 @@
 package com.example.digitalbusinesscard.ui.navigation
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.digitalbusinesscard.ui.screens.EditCardScreen
 import com.example.digitalbusinesscard.ui.screens.HomeScreen
+import com.example.digitalbusinesscard.ui.viewmodels.BusinessCardViewModel
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
+
+    val businessCardViewModel : BusinessCardViewModel = viewModel()
+
     NavHost(navController = navController, startDestination = Screen.Edit.route) {
-        composable("homeScreen/{fullName}/{jobTitle}/{company}/{phoneNumber}/{email}") { backStackEntry ->
-            val fullName = backStackEntry.arguments?.getString("fullName") ?: "Default Name"
-            val jobTitle = backStackEntry.arguments?.getString("jobTitle") ?: "Unknown"
-            val company = backStackEntry.arguments?.getString("company") ?: "N/A"
-            val phoneNumber = backStackEntry.arguments?.getString("phoneNumber") ?: "N/A"
-            val email = backStackEntry.arguments?.getString("email") ?: "N/A"
-
-            HomeScreen(navController, fullName, jobTitle, company, phoneNumber, email)
-        }
-
-        composable(Screen.Edit.route) { EditCardScreen(navController) }
+        composable(Screen.Home.route) { HomeScreen(navController, businessCardViewModel) }
+        composable(Screen.Edit.route) { EditCardScreen(navController, businessCardViewModel) }
     }
 }
 

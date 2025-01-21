@@ -20,21 +20,14 @@ import com.example.digitalbusinesscard.ui.viewmodels.BusinessCardViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditCardScreen (navController: NavController) {
-
-    var fullName by remember { mutableStateOf("")}
-    var jobTitle by remember { mutableStateOf("")}
-    var company by remember { mutableStateOf("")}
-    var phoneNumber by remember { mutableStateOf("")}
-    var email by remember { mutableStateOf("")}
-
+fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewModel) {
     Column (
         modifier = Modifier
             .padding(20.dp)
     ) {
         OutlinedTextField(
-            value = fullName,
-            onValueChange = { fullName = it },
+            value = viewModel.fullName,
+            onValueChange = { viewModel.fullName = it },
             label = { Text("Full Name") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -45,8 +38,8 @@ fun EditCardScreen (navController: NavController) {
         )
 
         OutlinedTextField(
-            value = jobTitle,
-            onValueChange = { jobTitle = it },
+            value = viewModel.jobTitle,
+            onValueChange = { viewModel.jobTitle = it },
             label = { Text("Job Title") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -58,8 +51,8 @@ fun EditCardScreen (navController: NavController) {
         )
 
         OutlinedTextField(
-            value = company,
-            onValueChange = { company = it },
+            value = viewModel.company,
+            onValueChange = { viewModel.company = it },
             label = { Text("Company") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -71,8 +64,8 @@ fun EditCardScreen (navController: NavController) {
         )
 
         OutlinedTextField(
-            value = phoneNumber,
-            onValueChange = { phoneNumber = it },
+            value = viewModel.phoneNumber,
+            onValueChange = { viewModel.phoneNumber = it },
             label = { Text("Phone Number") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -84,8 +77,8 @@ fun EditCardScreen (navController: NavController) {
         )
 
         OutlinedTextField(
-            value = email,
-            onValueChange = { email = it },
+            value = viewModel.email,
+            onValueChange = { viewModel.email = it },
             label = { Text("Email") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -97,7 +90,7 @@ fun EditCardScreen (navController: NavController) {
         )
 
         Button(
-            onClick = { navController.navigate("homeScreen/$fullName/$jobTitle/$company/$phoneNumber/$email") },
+            onClick = { navController.navigate("homeScreen") },
             modifier = Modifier
                 .fillMaxWidth()
             ) {
