@@ -90,7 +90,7 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
         )
 
         Button(
-            onClick = { navController.navigate("homeScreen") },
+            onClick = { navController.popBackStack() },
             modifier = Modifier
                 .fillMaxWidth()
             ) {

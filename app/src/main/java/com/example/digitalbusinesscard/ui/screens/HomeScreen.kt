@@ -29,6 +29,12 @@ import com.example.digitalbusinesscard.ui.viewmodels.BusinessCardViewModel
 
 @Composable
 fun HomeScreen(navController: NavController, viewModel: BusinessCardViewModel) {
+    val fullName = if (viewModel.fullName.isNotBlank()) viewModel.fullName else "Elon Musk"
+    val jobTitle = if (viewModel.jobTitle.isNotBlank()) viewModel.jobTitle else "Founder"
+    val company = if (viewModel.company.isNotBlank()) viewModel.company else "Tesla"
+    val phoneNumber = if (viewModel.phoneNumber.isNotBlank()) viewModel.phoneNumber else "03331234567"
+    val email = if (viewModel.email.isNotBlank()) viewModel.email else "elon@tesla.com"
+
     Column (
         modifier = Modifier
             .padding(20.dp)
@@ -46,7 +52,7 @@ fun HomeScreen(navController: NavController, viewModel: BusinessCardViewModel) {
                     .padding(15.dp)
             ) {
                 Text(
-                    text = viewModel.fullName,
+                    text = fullName,
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     fontFamily = FontFamily.Monospace,
@@ -55,14 +61,14 @@ fun HomeScreen(navController: NavController, viewModel: BusinessCardViewModel) {
                 )
 
                 Text(
-                    text = viewModel.jobTitle,
+                    text = jobTitle,
                     fontFamily = FontFamily.Monospace,
                     modifier = Modifier
                         .padding(bottom = 5.dp)
                 )
 
                 Text(
-                    text = viewModel.company,
+                    text = company,
                     fontFamily = FontFamily.Monospace,
                     modifier = Modifier
                         .padding(bottom = 10.dp)
@@ -77,7 +83,7 @@ fun HomeScreen(navController: NavController, viewModel: BusinessCardViewModel) {
                     )
 
                     Text(
-                        text = viewModel.phoneNumber,
+                        text = phoneNumber,
                         fontFamily = FontFamily.Monospace,
                         modifier = Modifier
                             .padding(start = 10.dp, bottom = 10.dp)
@@ -93,7 +99,7 @@ fun HomeScreen(navController: NavController, viewModel: BusinessCardViewModel) {
                     )
 
                     Text(
-                        text = viewModel.email,
+                        text = email,
                         fontFamily = FontFamily.Monospace,
                         modifier = Modifier
                             .padding(start = 10.dp)
@@ -111,7 +117,7 @@ fun HomeScreen(navController: NavController, viewModel: BusinessCardViewModel) {
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             Button(
-                onClick = { navController.popBackStack() },
+                onClick = { navController.navigate("editCardScreen") },
                 ) {
                 Text(text = "Create Card")
             }
