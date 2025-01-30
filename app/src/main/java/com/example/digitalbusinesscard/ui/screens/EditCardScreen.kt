@@ -92,9 +92,14 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
         Button(
             onClick = { navController.popBackStack() },
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            enabled = validateSubmitBtn(viewModel)
             ) {
             Text(text = "Submit")
         }
     }
+}
+
+fun validateSubmitBtn (viewModel: BusinessCardViewModel): Boolean {
+    return viewModel.fullName.isNotEmpty() && viewModel.jobTitle.isNotEmpty() && viewModel.company.isNotEmpty() && viewModel.phoneNumber.isNotEmpty() && viewModel.email.isNotEmpty()
 }
