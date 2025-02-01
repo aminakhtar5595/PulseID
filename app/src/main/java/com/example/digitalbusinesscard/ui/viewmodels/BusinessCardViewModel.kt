@@ -10,4 +10,8 @@ class BusinessCardViewModel: ViewModel() {
     var company by mutableStateOf("")
     var phoneNumber by mutableStateOf("")
     var email by mutableStateOf("")
+
+    fun isFormValid (): Boolean {
+        return fullName.isNotEmpty() && jobTitle.isNotEmpty() && company.isNotEmpty() && phoneNumber.isNotEmpty() && email.isNotEmpty()
+    }
 }

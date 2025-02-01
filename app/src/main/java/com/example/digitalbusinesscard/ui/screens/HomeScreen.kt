@@ -1,4 +1,5 @@
 package com.example.digitalbusinesscard.ui.screens
+import android.content.Intent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -24,12 +25,14 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.digitalbusinesscard.ui.navigation.Screen
 import com.example.digitalbusinesscard.ui.viewmodels.BusinessCardViewModel
 
 @Composable
@@ -39,6 +42,7 @@ fun HomeScreen(navController: NavController, viewModel: BusinessCardViewModel) {
     val company = viewModel.company.ifBlank { "Tesla" }
     val phoneNumber = viewModel.phoneNumber.ifBlank { "03331234567" }
     val email = viewModel.email.ifBlank { "elon@tesla.com" }
+    val context = LocalContext.current
 
     Column (
         modifier = Modifier
@@ -129,7 +133,7 @@ fun HomeScreen(navController: NavController, viewModel: BusinessCardViewModel) {
         }
         Spacer(
             modifier = Modifier
-                .height(10.dp)
+                .height(20.dp)
         )
         Row (
             modifier = Modifier
@@ -137,13 +141,19 @@ fun HomeScreen(navController: NavController, viewModel: BusinessCardViewModel) {
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             Button(
-                onClick = { navController.navigate("editCardScreen") },
+                onClick = { navController.navigate(Screen.Edit.route) },
                 ) {
                 Text(text = "Create Card")
             }
 
-            Button(onClick = {  },
-            ) {
+            Button(onClick = {
+                val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_SUBJECT, "My Business Card")
+                    putExtra(Intent.EXTRA_TEXT, "$fullName\n$jobTitle at $company\nPhone: $phoneNumber\nEmail: $email")
+                }
+                context.startActivity(Intent.createChooser(shareIntent, "Share via"))
+            }) {
                 Text(text = "Share Card")
             }
         }
