@@ -1,5 +1,6 @@
 package com.example.digitalbusinesscard.ui.screens
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,19 +10,23 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -29,19 +34,34 @@ import com.example.digitalbusinesscard.ui.viewmodels.BusinessCardViewModel
 
 @Composable
 fun HomeScreen(navController: NavController, viewModel: BusinessCardViewModel) {
-    val fullName = if (viewModel.fullName.isNotBlank()) viewModel.fullName else "Elon Musk"
-    val jobTitle = if (viewModel.jobTitle.isNotBlank()) viewModel.jobTitle else "Founder"
-    val company = if (viewModel.company.isNotBlank()) viewModel.company else "Tesla"
-    val phoneNumber = if (viewModel.phoneNumber.isNotBlank()) viewModel.phoneNumber else "03331234567"
-    val email = if (viewModel.email.isNotBlank()) viewModel.email else "elon@tesla.com"
+    val fullName = viewModel.fullName.ifBlank { "Elon Musk" }
+    val jobTitle = viewModel.jobTitle.ifBlank { "Founder" }
+    val company = viewModel.company.ifBlank { "Tesla" }
+    val phoneNumber = viewModel.phoneNumber.ifBlank { "03331234567" }
+    val email = viewModel.email.ifBlank { "elon@tesla.com" }
 
     Column (
         modifier = Modifier
-            .padding(20.dp)
+            .padding(vertical = 20.dp)
     ) {
+        Text(
+            text = "Home",
+            fontSize = 18.sp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 10.dp)
+            ,
+            textAlign = TextAlign.Center
+        )
+        Divider(color = Color.Black, thickness = 0.5.dp,
+            modifier = Modifier
+                .padding(bottom = 30.dp)
+            )
+
         Card (
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.surface,
             ),
