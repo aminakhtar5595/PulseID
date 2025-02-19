@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.digitalbusinesscard.ui.screens.EditCardScreen
 import com.example.digitalbusinesscard.ui.screens.HomeScreen
+import com.example.digitalbusinesscard.ui.screens.SplashScreen
 import com.example.digitalbusinesscard.ui.viewmodels.BusinessCardViewModel
 
 @Composable
@@ -13,9 +14,10 @@ fun AppNavGraph(navController: NavHostController) {
 
     val businessCardViewModel : BusinessCardViewModel = viewModel()
 
-    NavHost(navController = navController, startDestination = Screen.Home.route) {
+    NavHost(navController = navController, startDestination = Screen.Splash.route) {
         composable(Screen.Home.route) { HomeScreen(navController, businessCardViewModel) }
         composable(Screen.Edit.route) { EditCardScreen(navController, businessCardViewModel) }
+        composable(Screen.Splash.route) { SplashScreen() }
     }
 }
 
@@ -23,4 +25,5 @@ fun AppNavGraph(navController: NavHostController) {
 sealed class Screen(val route: String) {
     object Home : Screen("homeScreen")
     object Edit : Screen("editCardScreen")
+    object Splash : Screen("splashScreen")
 }
