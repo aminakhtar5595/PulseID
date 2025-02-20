@@ -15,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -80,7 +81,7 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
                 modifier = Modifier.padding(bottom = 15.dp)
             ) {
                 Icon(imageVector = Icons.Filled.AccountBox, contentDescription = "First Name",
-                    modifier = Modifier.padding(end = 10.dp))
+                    modifier = Modifier.padding(end = 15.dp))
 
                 TextField(
                     value = viewModel.fullName,
@@ -104,7 +105,7 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
                 modifier = Modifier.padding(bottom = 15.dp)
             ) {
                 Icon(imageVector = Icons.Filled.AccountBox, contentDescription = "Last Name",
-                    modifier = Modifier.padding(end = 10.dp))
+                    modifier = Modifier.padding(end = 15.dp))
 
                 TextField(
                     value = viewModel.fullName,
@@ -123,19 +124,31 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
                 )
             }
 
+            Row (
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(bottom = 15.dp)
+            ) {
+                Icon(imageVector = Icons.Filled.Phone, contentDescription = "Phone Number",
+                    modifier = Modifier.padding(end = 15.dp))
+
+                TextField(
+                    value = viewModel.phoneNumber,
+                    onValueChange = { viewModel.phoneNumber = it },
+                    colors = TextFieldDefaults.textFieldColors(
+                        containerColor = Color.Transparent,
+                        textColor = Color.Gray,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        placeholderColor = Color.LightGray
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .border(width = 0.5.dp, color = Color.LightGray),
+                    placeholder = { Text("Phone Number") },
+                )
+            }
+
 // Commenting old UI
-//        OutlinedTextField(
-//            value = viewModel.fullName,
-//            onValueChange = { viewModel.fullName = it },
-//            label = { Text("Full Name") },
-//            modifier = Modifier
-//                .fillMaxWidth()
-//        )
-//        Spacer(
-//            modifier = Modifier
-//            .height(15.dp)
-//        )
-//
 //        OutlinedTextField(
 //            value = viewModel.jobTitle,
 //            onValueChange = { viewModel.jobTitle = it },
@@ -143,12 +156,7 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
 //            modifier = Modifier
 //                .fillMaxWidth()
 //        )
-//
-//        Spacer(
-//            modifier = Modifier
-//                .height(15.dp)
-//        )
-//
+
 //        OutlinedTextField(
 //            value = viewModel.company,
 //            onValueChange = { viewModel.company = it },
@@ -156,25 +164,7 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
 //            modifier = Modifier
 //                .fillMaxWidth()
 //        )
-//
-//        Spacer(
-//            modifier = Modifier
-//                .height(15.dp)
-//        )
-//
-//        OutlinedTextField(
-//            value = viewModel.phoneNumber,
-//            onValueChange = { viewModel.phoneNumber = it },
-//            label = { Text("Phone Number") },
-//            modifier = Modifier
-//                .fillMaxWidth()
-//        )
-//
-//        Spacer(
-//            modifier = Modifier
-//                .height(15.dp)
-//        )
-//
+
 //        OutlinedTextField(
 //            value = viewModel.email,
 //            onValueChange = { viewModel.email = it },
@@ -182,12 +172,7 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
 //            modifier = Modifier
 //                .fillMaxWidth()
 //        )
-//
-//        Spacer(
-//            modifier = Modifier
-//                .height(15.dp)
-//        )
-//
+
 //        Button(
 //            onClick = { navController.popBackStack() },
 //            modifier = Modifier
