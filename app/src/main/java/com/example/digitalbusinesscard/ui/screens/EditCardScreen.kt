@@ -41,18 +41,17 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
         Row (
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 10.dp, start = 20.dp),
+                .padding(bottom = 20.dp, start = 20.dp),
         ) {
             Icon(
                 imageVector = Icons.Filled.ArrowBack,
                 contentDescription = "Arrow Back",
                 modifier = Modifier
-                    .size(20.dp)
-                    .clickable { navController.popBackStack() }
-                ,
+                    .size(23.dp)
+                    .clickable { navController.popBackStack() },
             )
             Text(
-                text = "Create Card",
+                text = "Add new Card",
                 fontSize = 18.sp,
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -60,7 +59,7 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
             )
         }
 
-        Divider(color = Color.Black, thickness = 0.5.dp,
+        Divider(color = Color.Gray, thickness = 0.5.dp,
             modifier = Modifier
                 .padding(bottom = 20.dp)
         )
@@ -68,78 +67,80 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
             modifier = Modifier
                 .padding(horizontal = 20.dp)
         ) {
-        OutlinedTextField(
-            value = viewModel.fullName,
-            onValueChange = { viewModel.fullName = it },
-            label = { Text("Full Name") },
-            modifier = Modifier
-                .fillMaxWidth()
-        )
-        Spacer(
-            modifier = Modifier
-            .height(15.dp)
-        )
 
-        OutlinedTextField(
-            value = viewModel.jobTitle,
-            onValueChange = { viewModel.jobTitle = it },
-            label = { Text("Job Title") },
-            modifier = Modifier
-                .fillMaxWidth()
-        )
-
-        Spacer(
-            modifier = Modifier
-                .height(15.dp)
-        )
-
-        OutlinedTextField(
-            value = viewModel.company,
-            onValueChange = { viewModel.company = it },
-            label = { Text("Company") },
-            modifier = Modifier
-                .fillMaxWidth()
-        )
-
-        Spacer(
-            modifier = Modifier
-                .height(15.dp)
-        )
-
-        OutlinedTextField(
-            value = viewModel.phoneNumber,
-            onValueChange = { viewModel.phoneNumber = it },
-            label = { Text("Phone Number") },
-            modifier = Modifier
-                .fillMaxWidth()
-        )
-
-        Spacer(
-            modifier = Modifier
-                .height(15.dp)
-        )
-
-        OutlinedTextField(
-            value = viewModel.email,
-            onValueChange = { viewModel.email = it },
-            label = { Text("Email") },
-            modifier = Modifier
-                .fillMaxWidth()
-        )
-
-        Spacer(
-            modifier = Modifier
-                .height(15.dp)
-        )
-
-        Button(
-            onClick = { navController.popBackStack() },
-            modifier = Modifier
-                .fillMaxWidth(),
-            enabled = viewModel.isFormValid()
-            ) {
-            Text(text = "Submit")
-        }
+// Commenting old UI
+//        OutlinedTextField(
+//            value = viewModel.fullName,
+//            onValueChange = { viewModel.fullName = it },
+//            label = { Text("Full Name") },
+//            modifier = Modifier
+//                .fillMaxWidth()
+//        )
+//        Spacer(
+//            modifier = Modifier
+//            .height(15.dp)
+//        )
+//
+//        OutlinedTextField(
+//            value = viewModel.jobTitle,
+//            onValueChange = { viewModel.jobTitle = it },
+//            label = { Text("Job Title") },
+//            modifier = Modifier
+//                .fillMaxWidth()
+//        )
+//
+//        Spacer(
+//            modifier = Modifier
+//                .height(15.dp)
+//        )
+//
+//        OutlinedTextField(
+//            value = viewModel.company,
+//            onValueChange = { viewModel.company = it },
+//            label = { Text("Company") },
+//            modifier = Modifier
+//                .fillMaxWidth()
+//        )
+//
+//        Spacer(
+//            modifier = Modifier
+//                .height(15.dp)
+//        )
+//
+//        OutlinedTextField(
+//            value = viewModel.phoneNumber,
+//            onValueChange = { viewModel.phoneNumber = it },
+//            label = { Text("Phone Number") },
+//            modifier = Modifier
+//                .fillMaxWidth()
+//        )
+//
+//        Spacer(
+//            modifier = Modifier
+//                .height(15.dp)
+//        )
+//
+//        OutlinedTextField(
+//            value = viewModel.email,
+//            onValueChange = { viewModel.email = it },
+//            label = { Text("Email") },
+//            modifier = Modifier
+//                .fillMaxWidth()
+//        )
+//
+//        Spacer(
+//            modifier = Modifier
+//                .height(15.dp)
+//        )
+//
+//        Button(
+//            onClick = { navController.popBackStack() },
+//            modifier = Modifier
+//                .fillMaxWidth(),
+//            enabled = viewModel.isFormValid()
+//            ) {
+//            Text(text = "Submit")
+//        }
     }
     }
 }

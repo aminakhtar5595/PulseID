@@ -43,10 +43,9 @@ fun HomeScreen() {
 
         Column (
             modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(vertical = 40.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
         ) {
             Image(
                 painter = painterResource(id = R.drawable.home_icon),
