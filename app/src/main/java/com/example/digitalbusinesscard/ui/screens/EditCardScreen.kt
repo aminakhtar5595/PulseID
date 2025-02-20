@@ -15,7 +15,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.MailOutline
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
@@ -81,7 +84,7 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(bottom = 15.dp)
             ) {
-                Icon(imageVector = Icons.Filled.AccountBox, contentDescription = "First Name",
+                Icon(imageVector = Icons.Filled.Person, contentDescription = "First Name",
                     modifier = Modifier.padding(end = 15.dp))
 
                 TextField(
@@ -105,7 +108,7 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(bottom = 15.dp)
             ) {
-                Icon(imageVector = Icons.Filled.AccountBox, contentDescription = "Last Name",
+                Icon(imageVector = Icons.Filled.Person, contentDescription = "Last Name",
                     modifier = Modifier.padding(end = 15.dp))
 
                 TextField(
@@ -153,7 +156,7 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(bottom = 15.dp)
             ) {
-                Icon(imageVector = Icons.Filled.Email, contentDescription = "Email",
+                Icon(imageVector = Icons.Filled.MailOutline, contentDescription = "Email",
                     modifier = Modifier.padding(end = 15.dp))
 
                 TextField(
@@ -197,22 +200,31 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
                 )
             }
 
-// Commenting old UI
-//        OutlinedTextField(
-//            value = viewModel.jobTitle,
-//            onValueChange = { viewModel.jobTitle = it },
-//            label = { Text("Job Title") },
-//            modifier = Modifier
-//                .fillMaxWidth()
-//        )
+            Row (
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(bottom = 15.dp)
+            ) {
+                Icon(imageVector = Icons.Filled.Info, contentDescription = "Company",
+                    modifier = Modifier.padding(end = 15.dp))
 
-//        OutlinedTextField(
-//            value = viewModel.company,
-//            onValueChange = { viewModel.company = it },
-//            label = { Text("Company") },
-//            modifier = Modifier
-//                .fillMaxWidth()
-//        )
+                TextField(
+                    value = viewModel.company,
+                    onValueChange = { viewModel.company = it },
+                    colors = TextFieldDefaults.textFieldColors(
+                        containerColor = Color.Transparent,
+                        textColor = Color.Gray,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        placeholderColor = Color.LightGray
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .border(width = 0.5.dp, color = Color.LightGray),
+                    placeholder = { Text("Company") },
+                )
+            }
+
+// Commenting old UI
 
 //        Button(
 //            onClick = { navController.popBackStack() },
