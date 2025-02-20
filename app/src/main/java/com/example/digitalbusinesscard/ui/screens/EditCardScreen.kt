@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.ArrowBack
@@ -21,6 +22,7 @@ import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -72,17 +74,15 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
             )
         }
 
-        Divider(color = Color.Gray, thickness = 0.5.dp,
-            modifier = Modifier
-                .padding(bottom = 20.dp)
-        )
+        Divider(color = Color.Gray, thickness = 0.5.dp)
+
         Column (
             modifier = Modifier
-                .padding(horizontal = 20.dp)
+                .padding(horizontal = 20.dp, vertical = 20.dp)
         ) {
             Row (
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(bottom = 15.dp)
+                modifier = Modifier.padding(bottom = 20.dp)
             ) {
                 Icon(imageVector = Icons.Filled.Person, contentDescription = "First Name",
                     modifier = Modifier.padding(end = 15.dp))
@@ -106,7 +106,7 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
 
             Row (
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(bottom = 15.dp)
+                modifier = Modifier.padding(bottom = 20.dp)
             ) {
                 Icon(imageVector = Icons.Filled.Person, contentDescription = "Last Name",
                     modifier = Modifier.padding(end = 15.dp))
@@ -130,7 +130,7 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
 
             Row (
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(bottom = 15.dp)
+                modifier = Modifier.padding(bottom = 20.dp)
             ) {
                 Icon(imageVector = Icons.Filled.Phone, contentDescription = "Phone Number",
                     modifier = Modifier.padding(end = 15.dp))
@@ -154,7 +154,7 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
 
             Row (
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(bottom = 15.dp)
+                modifier = Modifier.padding(bottom = 20.dp)
             ) {
                 Icon(imageVector = Icons.Filled.MailOutline, contentDescription = "Email",
                     modifier = Modifier.padding(end = 15.dp))
@@ -178,7 +178,7 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
 
             Row (
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(bottom = 15.dp)
+                modifier = Modifier.padding(bottom = 20.dp)
             ) {
                 Icon(imageVector = Icons.Filled.Lock, contentDescription = "Job",
                     modifier = Modifier.padding(end = 15.dp))
@@ -202,7 +202,7 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
 
             Row (
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(bottom = 15.dp)
+                modifier = Modifier.padding(bottom = 20.dp)
             ) {
                 Icon(imageVector = Icons.Filled.Info, contentDescription = "Company",
                     modifier = Modifier.padding(end = 15.dp))
@@ -224,16 +224,16 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
                 )
             }
 
-// Commenting old UI
+            Button(
+                onClick = {  },
+                modifier = Modifier
+                    .fillMaxWidth(),
+                shape = RoundedCornerShape(5.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)
+            ) {
+                Text(text = "SAVE")
+            }
 
-//        Button(
-//            onClick = { navController.popBackStack() },
-//            modifier = Modifier
-//                .fillMaxWidth(),
-//            enabled = viewModel.isFormValid()
-//            ) {
-//            Text(text = "Submit")
-//        }
-    }
+        }
     }
 }
