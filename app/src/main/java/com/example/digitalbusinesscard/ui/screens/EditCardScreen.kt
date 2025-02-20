@@ -148,6 +148,30 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
                 )
             }
 
+            Row (
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(bottom = 15.dp)
+            ) {
+                Icon(imageVector = Icons.Filled.Email, contentDescription = "Email",
+                    modifier = Modifier.padding(end = 15.dp))
+
+                TextField(
+                    value = viewModel.email,
+                    onValueChange = { viewModel.email = it },
+                    colors = TextFieldDefaults.textFieldColors(
+                        containerColor = Color.Transparent,
+                        textColor = Color.Gray,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        placeholderColor = Color.LightGray
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .border(width = 0.5.dp, color = Color.LightGray),
+                    placeholder = { Text("Email") },
+                )
+            }
+
 // Commenting old UI
 //        OutlinedTextField(
 //            value = viewModel.jobTitle,
@@ -161,14 +185,6 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
 //            value = viewModel.company,
 //            onValueChange = { viewModel.company = it },
 //            label = { Text("Company") },
-//            modifier = Modifier
-//                .fillMaxWidth()
-//        )
-
-//        OutlinedTextField(
-//            value = viewModel.email,
-//            onValueChange = { viewModel.email = it },
-//            label = { Text("Email") },
 //            modifier = Modifier
 //                .fillMaxWidth()
 //        )
