@@ -15,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
@@ -169,6 +170,30 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
                         .fillMaxWidth()
                         .border(width = 0.5.dp, color = Color.LightGray),
                     placeholder = { Text("Email") },
+                )
+            }
+
+            Row (
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(bottom = 15.dp)
+            ) {
+                Icon(imageVector = Icons.Filled.Lock, contentDescription = "Job",
+                    modifier = Modifier.padding(end = 15.dp))
+
+                TextField(
+                    value = viewModel.jobTitle,
+                    onValueChange = { viewModel.jobTitle = it },
+                    colors = TextFieldDefaults.textFieldColors(
+                        containerColor = Color.Transparent,
+                        textColor = Color.Gray,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        placeholderColor = Color.LightGray
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .border(width = 0.5.dp, color = Color.LightGray),
+                    placeholder = { Text("Job") },
                 )
             }
 
