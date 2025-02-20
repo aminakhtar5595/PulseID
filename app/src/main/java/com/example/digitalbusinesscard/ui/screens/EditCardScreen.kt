@@ -76,7 +76,8 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
                 .padding(horizontal = 20.dp)
         ) {
             Row (
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(bottom = 15.dp)
             ) {
                 Icon(imageVector = Icons.Filled.AccountBox, contentDescription = "First Name",
                     modifier = Modifier.padding(end = 10.dp))
@@ -95,6 +96,30 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
                         .fillMaxWidth()
                         .border(width = 0.5.dp, color = Color.LightGray),
                     placeholder = { Text("First Name") },
+                )
+            }
+
+            Row (
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(bottom = 15.dp)
+            ) {
+                Icon(imageVector = Icons.Filled.AccountBox, contentDescription = "Last Name",
+                    modifier = Modifier.padding(end = 10.dp))
+
+                TextField(
+                    value = viewModel.fullName,
+                    onValueChange = { viewModel.fullName = it },
+                    colors = TextFieldDefaults.textFieldColors(
+                        containerColor = Color.Transparent,
+                        textColor = Color.Gray,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        placeholderColor = Color.LightGray
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .border(width = 0.5.dp, color = Color.LightGray),
+                    placeholder = { Text("Last Name") },
                 )
             }
 
