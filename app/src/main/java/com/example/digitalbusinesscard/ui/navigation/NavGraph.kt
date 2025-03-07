@@ -14,7 +14,7 @@ fun AppNavGraph(navController: NavHostController) {
 
     val businessCardViewModel : BusinessCardViewModel = viewModel()
 
-    NavHost(navController = navController, startDestination = Screen.Edit.route) {
+    NavHost(navController = navController, startDestination = Screen.Home.route) {
 //        composable(Screen.Home.route) { HomeScreen(navController, businessCardViewModel) }
         composable(Screen.Edit.route) { EditCardScreen(navController, businessCardViewModel) }
         composable(Screen.Splash.route) { SplashScreen() }
