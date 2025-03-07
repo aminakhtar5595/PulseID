@@ -2,11 +2,12 @@ package com.example.digitalbusinesscard.ui.screens
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -28,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import com.example.digitalbusinesscard.R
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -39,55 +41,15 @@ import androidx.compose.ui.window.Dialog
 @Composable
 fun HomeScreen() {
     var showDialog by remember { mutableStateOf(false) }
-    Column (
-        modifier = Modifier
-            .padding(20.dp)
-    ) {
-        Icon(
-            imageVector = Icons.Filled.Menu,
-            contentDescription = "Menu",
-            modifier = Modifier
-                .size(25.dp)
-        )
+    val showCard = true
 
-        Column (
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 40.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.home_icon),
-                contentDescription = "Home Icon",
-                modifier = Modifier
-                    .size(250.dp)
-            )
-
-            Spacer(modifier = Modifier.height(40.dp))
-            Button(
-                onClick = { showDialog = true },
-                shape = RoundedCornerShape(5.dp),
-                contentPadding = PaddingValues(horizontal = 23.dp, vertical = 18.dp),
-                border = BorderStroke(0.5.dp, Color.LightGray),
-                colors = ButtonDefaults.buttonColors(contentColor = Color.Black, containerColor = Color.Transparent),
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.Create,
-                    contentDescription = "Create Card",
-                    modifier = Modifier
-                        .size(20.dp)
-                )
-                Text(
-                    text = "CREATE CARD",
-                    modifier = Modifier
-                        .padding(start = 10.dp),
-                    style = TextStyle(
-                        fontSize = 18.sp
-                    )
-                )
-            }
-        }
+    if (showCard) {
+        CardView()
+    } else {
+        HomeView(dismiss = { showDialog = true })
     }
+
+
 
     if (showDialog) {
         dialogView(
@@ -142,6 +104,76 @@ fun dialogView(dismiss: () -> Unit ) {
                 }
             }
         }
+    }
+}
 
+@Composable
+fun CardView() {
+    Box (
+        modifier = Modifier
+            .background(color = Color.Cyan, shape = RoundedCornerShape(10.dp))
+            .padding(20.dp)
+    ) {
+        Column {
+            Text(text = "First Name")
+            Text(text = "Last Name")
+            Text(text = "Phone Number")
+            Text(text = "Email")
+            Text(text = "Job")
+            Text(text = "Company")
+        }
+    }
+}
+
+@Composable
+fun HomeView(dismiss: () -> Unit) {
+    Column (
+        modifier = Modifier
+            .padding(20.dp)
+    ) {
+        Icon(
+            imageVector = Icons.Filled.Menu,
+            contentDescription = "Menu",
+            modifier = Modifier
+                .size(25.dp)
+        )
+
+        Column (
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 40.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.home_icon),
+                contentDescription = "Home Icon",
+                modifier = Modifier
+                    .size(250.dp)
+            )
+
+            Spacer(modifier = Modifier.height(40.dp))
+            Button(
+                onClick = { dismiss() },
+                shape = RoundedCornerShape(5.dp),
+                contentPadding = PaddingValues(horizontal = 23.dp, vertical = 18.dp),
+                border = BorderStroke(0.5.dp, Color.LightGray),
+                colors = ButtonDefaults.buttonColors(contentColor = Color.Black, containerColor = Color.Transparent),
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Create,
+                    contentDescription = "Create Card",
+                    modifier = Modifier
+                        .size(20.dp)
+                )
+                Text(
+                    text = "CREATE CARD",
+                    modifier = Modifier
+                        .padding(start = 10.dp),
+                    style = TextStyle(
+                        fontSize = 18.sp
+                    )
+                )
+            }
+        }
     }
 }
