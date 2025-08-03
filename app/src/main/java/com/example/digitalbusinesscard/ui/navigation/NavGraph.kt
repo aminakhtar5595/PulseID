@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.digitalbusinesscard.ui.screens.EditCardScreen
 import com.example.digitalbusinesscard.ui.screens.HomeScreen
-import com.example.digitalbusinesscard.ui.screens.SplashScreen
+import com.example.digitalbusinesscard.ui.screens.splash.SplashScreen
 import com.example.digitalbusinesscard.ui.viewmodels.BusinessCardViewModel
 
 @Composable

@@ -1,4 +1,4 @@
-package com.example.digitalbusinesscard.ui.screens
+package com.example.digitalbusinesscard.ui.screens.splash
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
