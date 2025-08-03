@@ -43,7 +43,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 
 @Composable
-fun HomeScreen() {
+fun CardScreen() {
     var showDialog by remember { mutableStateOf(false) }
     val showCard = true
 
