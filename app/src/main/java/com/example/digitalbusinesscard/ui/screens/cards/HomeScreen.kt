@@ -1,4 +1,4 @@
-package com.example.digitalbusinesscard.ui.screens
+package com.example.digitalbusinesscard.ui.screens.cards
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

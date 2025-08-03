@@ -1,4 +1,4 @@
-package com.example.digitalbusinesscard.ui.screens
+package com.example.digitalbusinesscard.ui.screens.cards
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
