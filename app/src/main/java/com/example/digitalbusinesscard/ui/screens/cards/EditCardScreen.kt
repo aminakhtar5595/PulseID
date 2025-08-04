@@ -62,164 +62,164 @@ fun EditCardScreen (navController: NavController, viewModel: BusinessCardViewMod
 
         Divider(color = Color.Gray, thickness = 0.5.dp)
 
-        Column (
-            modifier = Modifier
-                .padding(horizontal = 20.dp, vertical = 20.dp)
-        ) {
-            Row (
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(bottom = 20.dp)
-            ) {
-                Icon(imageVector = Icons.Filled.Person, contentDescription = "First Name",
-                    modifier = Modifier.padding(end = 15.dp))
-
-                TextField(
-                    value = viewModel.fullName,
-                    onValueChange = { viewModel.fullName = it },
-                    colors = TextFieldDefaults.textFieldColors(
-                        containerColor = Color.Transparent,
-                        textColor = Color.Gray,
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        placeholderColor = Color.LightGray
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(width = 0.5.dp, color = Color.LightGray),
-                    placeholder = { Text("First Name") },
-                )
-            }
-
-            Row (
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(bottom = 20.dp)
-            ) {
-                Icon(imageVector = Icons.Filled.Person, contentDescription = "Last Name",
-                    modifier = Modifier.padding(end = 15.dp))
-
-                TextField(
-                    value = viewModel.fullName,
-                    onValueChange = { viewModel.fullName = it },
-                    colors = TextFieldDefaults.textFieldColors(
-                        containerColor = Color.Transparent,
-                        textColor = Color.Gray,
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        placeholderColor = Color.LightGray
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(width = 0.5.dp, color = Color.LightGray),
-                    placeholder = { Text("Last Name") },
-                )
-            }
-
-            Row (
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(bottom = 20.dp)
-            ) {
-                Icon(imageVector = Icons.Filled.Phone, contentDescription = "Phone Number",
-                    modifier = Modifier.padding(end = 15.dp))
-
-                TextField(
-                    value = viewModel.phoneNumber,
-                    onValueChange = { viewModel.phoneNumber = it },
-                    colors = TextFieldDefaults.textFieldColors(
-                        containerColor = Color.Transparent,
-                        textColor = Color.Gray,
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        placeholderColor = Color.LightGray
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(width = 0.5.dp, color = Color.LightGray),
-                    placeholder = { Text("Phone Number") },
-                )
-            }
-
-            Row (
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(bottom = 20.dp)
-            ) {
-                Icon(imageVector = Icons.Filled.MailOutline, contentDescription = "Email",
-                    modifier = Modifier.padding(end = 15.dp))
-
-                TextField(
-                    value = viewModel.email,
-                    onValueChange = { viewModel.email = it },
-                    colors = TextFieldDefaults.textFieldColors(
-                        containerColor = Color.Transparent,
-                        textColor = Color.Gray,
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        placeholderColor = Color.LightGray
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(width = 0.5.dp, color = Color.LightGray),
-                    placeholder = { Text("Email") },
-                )
-            }
-
-            Row (
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(bottom = 20.dp)
-            ) {
-                Icon(imageVector = Icons.Filled.Lock, contentDescription = "Job",
-                    modifier = Modifier.padding(end = 15.dp))
-
-                TextField(
-                    value = viewModel.jobTitle,
-                    onValueChange = { viewModel.jobTitle = it },
-                    colors = TextFieldDefaults.textFieldColors(
-                        containerColor = Color.Transparent,
-                        textColor = Color.Gray,
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        placeholderColor = Color.LightGray
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(width = 0.5.dp, color = Color.LightGray),
-                    placeholder = { Text("Job") },
-                )
-            }
-
-            Row (
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(bottom = 20.dp)
-            ) {
-                Icon(imageVector = Icons.Filled.Info, contentDescription = "Company",
-                    modifier = Modifier.padding(end = 15.dp))
-
-                TextField(
-                    value = viewModel.company,
-                    onValueChange = { viewModel.company = it },
-                    colors = TextFieldDefaults.textFieldColors(
-                        containerColor = Color.Transparent,
-                        textColor = Color.Gray,
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        placeholderColor = Color.LightGray
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(width = 0.5.dp, color = Color.LightGray),
-                    placeholder = { Text("Company") },
-                )
-            }
-
-            Button(
-                onClick = {  },
-                modifier = Modifier
-                    .fillMaxWidth(),
-                shape = RoundedCornerShape(5.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)
-            ) {
-                Text(text = "SAVE")
-            }
-
-        }
+//        Column (
+//            modifier = Modifier
+//                .padding(horizontal = 20.dp, vertical = 20.dp)
+//        ) {
+//            Row (
+//                verticalAlignment = Alignment.CenterVertically,
+//                modifier = Modifier.padding(bottom = 20.dp)
+//            ) {
+//                Icon(imageVector = Icons.Filled.Person, contentDescription = "First Name",
+//                    modifier = Modifier.padding(end = 15.dp))
+//
+//                TextField(
+//                    value = viewModel.fullName,
+//                    onValueChange = { viewModel.fullName = it },
+//                    colors = TextFieldDefaults.textFieldColors(
+//                        containerColor = Color.Transparent,
+//                        textColor = Color.Gray,
+//                        focusedIndicatorColor = Color.Transparent,
+//                        unfocusedIndicatorColor = Color.Transparent,
+//                        placeholderColor = Color.LightGray
+//                    ),
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .border(width = 0.5.dp, color = Color.LightGray),
+//                    placeholder = { Text("First Name") },
+//                )
+//            }
+//
+//            Row (
+//                verticalAlignment = Alignment.CenterVertically,
+//                modifier = Modifier.padding(bottom = 20.dp)
+//            ) {
+//                Icon(imageVector = Icons.Filled.Person, contentDescription = "Last Name",
+//                    modifier = Modifier.padding(end = 15.dp))
+//
+//                TextField(
+//                    value = viewModel.fullName,
+//                    onValueChange = { viewModel.fullName = it },
+//                    colors = TextFieldDefaults.textFieldColors(
+//                        containerColor = Color.Transparent,
+//                        textColor = Color.Gray,
+//                        focusedIndicatorColor = Color.Transparent,
+//                        unfocusedIndicatorColor = Color.Transparent,
+//                        placeholderColor = Color.LightGray
+//                    ),
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .border(width = 0.5.dp, color = Color.LightGray),
+//                    placeholder = { Text("Last Name") },
+//                )
+//            }
+//
+//            Row (
+//                verticalAlignment = Alignment.CenterVertically,
+//                modifier = Modifier.padding(bottom = 20.dp)
+//            ) {
+//                Icon(imageVector = Icons.Filled.Phone, contentDescription = "Phone Number",
+//                    modifier = Modifier.padding(end = 15.dp))
+//
+//                TextField(
+//                    value = viewModel.phoneNumber,
+//                    onValueChange = { viewModel.phoneNumber = it },
+//                    colors = TextFieldDefaults.textFieldColors(
+//                        containerColor = Color.Transparent,
+//                        textColor = Color.Gray,
+//                        focusedIndicatorColor = Color.Transparent,
+//                        unfocusedIndicatorColor = Color.Transparent,
+//                        placeholderColor = Color.LightGray
+//                    ),
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .border(width = 0.5.dp, color = Color.LightGray),
+//                    placeholder = { Text("Phone Number") },
+//                )
+//            }
+//
+//            Row (
+//                verticalAlignment = Alignment.CenterVertically,
+//                modifier = Modifier.padding(bottom = 20.dp)
+//            ) {
+//                Icon(imageVector = Icons.Filled.MailOutline, contentDescription = "Email",
+//                    modifier = Modifier.padding(end = 15.dp))
+//
+//                TextField(
+//                    value = viewModel.email,
+//                    onValueChange = { viewModel.email = it },
+//                    colors = TextFieldDefaults.textFieldColors(
+//                        containerColor = Color.Transparent,
+//                        textColor = Color.Gray,
+//                        focusedIndicatorColor = Color.Transparent,
+//                        unfocusedIndicatorColor = Color.Transparent,
+//                        placeholderColor = Color.LightGray
+//                    ),
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .border(width = 0.5.dp, color = Color.LightGray),
+//                    placeholder = { Text("Email") },
+//                )
+//            }
+//
+//            Row (
+//                verticalAlignment = Alignment.CenterVertically,
+//                modifier = Modifier.padding(bottom = 20.dp)
+//            ) {
+//                Icon(imageVector = Icons.Filled.Lock, contentDescription = "Job",
+//                    modifier = Modifier.padding(end = 15.dp))
+//
+//                TextField(
+//                    value = viewModel.jobTitle,
+//                    onValueChange = { viewModel.jobTitle = it },
+//                    colors = TextFieldDefaults.textFieldColors(
+//                        containerColor = Color.Transparent,
+//                        textColor = Color.Gray,
+//                        focusedIndicatorColor = Color.Transparent,
+//                        unfocusedIndicatorColor = Color.Transparent,
+//                        placeholderColor = Color.LightGray
+//                    ),
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .border(width = 0.5.dp, color = Color.LightGray),
+//                    placeholder = { Text("Job") },
+//                )
+//            }
+//
+//            Row (
+//                verticalAlignment = Alignment.CenterVertically,
+//                modifier = Modifier.padding(bottom = 20.dp)
+//            ) {
+//                Icon(imageVector = Icons.Filled.Info, contentDescription = "Company",
+//                    modifier = Modifier.padding(end = 15.dp))
+//
+//                TextField(
+//                    value = viewModel.company,
+//                    onValueChange = { viewModel.company = it },
+//                    colors = TextFieldDefaults.textFieldColors(
+//                        containerColor = Color.Transparent,
+//                        textColor = Color.Gray,
+//                        focusedIndicatorColor = Color.Transparent,
+//                        unfocusedIndicatorColor = Color.Transparent,
+//                        placeholderColor = Color.LightGray
+//                    ),
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .border(width = 0.5.dp, color = Color.LightGray),
+//                    placeholder = { Text("Company") },
+//                )
+//            }
+//
+//            Button(
+//                onClick = {  },
+//                modifier = Modifier
+//                    .fillMaxWidth(),
+//                shape = RoundedCornerShape(5.dp),
+//                colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)
+//            ) {
+//                Text(text = "SAVE")
+//            }
+//
+//        }
     }
 }
