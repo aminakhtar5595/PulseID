@@ -19,13 +19,28 @@ import com.example.digitalbusinesscard.ui.theme.BorderColor
 @Composable
 fun MenuScreen() {
     Column (
-        modifier = Modifier.fillMaxSize().background(color = BackgroundColor).padding(vertical = 20.dp)
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = BackgroundColor)
+            .padding(vertical = 20.dp)
     ) {
         Text(
             text = "Menu",
-            style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.W500), modifier = Modifier.padding(horizontal = 20.dp)
+            style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.W500), modifier = Modifier.padding(horizontal = 20.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
-        HorizontalDivider(thickness = 1.dp, color = BorderColor)
+        HorizontalDivider(thickness = 1.5.dp, color = BorderColor)
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Column (
+            modifier = Modifier.padding(horizontal = 20.dp)
+        ) {
+            Text(
+                text = "GENERAL",
+                style = MaterialTheme.typography.titleLarge
+            )
+        }
+
     }
 }
