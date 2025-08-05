@@ -114,6 +114,17 @@ fun MenuScreen() {
                 IconTextRow(menu)
                 Spacer(modifier = Modifier.height(30.dp))
             }
+            HorizontalDivider(thickness = 1.dp, color = BorderColor)
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = "INFORMATION",
+                style = MaterialTheme.typography.titleLarge
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            menuItems.subList(12, 15).forEach { menu ->
+                IconTextRow(menu)
+                Spacer(modifier = Modifier.height(30.dp))
+            }
 
         }
     }
