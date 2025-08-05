@@ -125,7 +125,12 @@ fun MenuScreen() {
                 IconTextRow(menu)
                 Spacer(modifier = Modifier.height(30.dp))
             }
-
+            HorizontalDivider(thickness = 1.dp, color = BorderColor)
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = "v. 2.4.2",
+                style = MaterialTheme.typography.bodyLarge.copy(textAlign = TextAlign.Center), modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 }
