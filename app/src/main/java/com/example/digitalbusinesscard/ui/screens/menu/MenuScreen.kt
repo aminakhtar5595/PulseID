@@ -6,6 +6,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.List
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,18 +17,45 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.digitalbusinesscard.ui.theme.BackgroundColor
 import androidx.compose.material3.HorizontalDivider
+import com.example.digitalbusinesscard.ui.components.IconTextRow
+import com.example.digitalbusinesscard.ui.model.Menu
 import com.example.digitalbusinesscard.ui.theme.BorderColor
 
 @Composable
 fun MenuScreen() {
+    val menuItems = listOf(
+        Menu(Icons.Outlined.List, "CARD LIST", "List of your current business cards"),
+        Menu(Icons.Outlined.Person, "GIVE FEEDBACK", "Anonymous feedback to improve the app")
+    )
     Column (
-        modifier = Modifier.fillMaxSize().background(color = BackgroundColor).padding(vertical = 20.dp)
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = BackgroundColor)
+            .padding(vertical = 20.dp)
     ) {
         Text(
             text = "Menu",
-            style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.W500), modifier = Modifier.padding(horizontal = 20.dp)
+            style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.W500), modifier = Modifier.padding(horizontal = 20.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
-        HorizontalDivider(thickness = 1.dp, color = BorderColor)
+        HorizontalDivider(thickness = 1.5.dp, color = BorderColor)
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Column (
+            modifier = Modifier.padding(horizontal = 20.dp)
+        ) {
+            Text(
+                text = "GENERAL",
+                style = MaterialTheme.typography.titleLarge
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+
+            menuItems.forEach { menu ->
+                IconTextRow(menu)
+                Spacer(modifier = Modifier.height(30.dp))
+            }
+
+        }
     }
 }
