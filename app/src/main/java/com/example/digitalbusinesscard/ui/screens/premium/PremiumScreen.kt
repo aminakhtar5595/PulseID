@@ -71,5 +71,20 @@ fun PremiumScreen() {
             )
         }
         Spacer(modifier = Modifier.height(20.dp))
+
+        Column (
+            modifier = Modifier.padding(horizontal = 12.dp)
+        ) {
+            Text(
+                text = "Network on a new level",
+                style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = "Present yourself professionally and get the most out of your digital business card",
+                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Light, color = Color.Gray, fontSize = 18.sp)
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+        }
     }
 }
