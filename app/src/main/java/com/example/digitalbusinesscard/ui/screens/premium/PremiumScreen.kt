@@ -156,5 +156,34 @@ fun ContactFormSheet(
     sheetState: SheetState,
     onDismissRequest: () -> Unit
 ) {
-
+    var name by remember { mutableStateOf("") }
+    if (showSheet) {
+        ModalBottomSheet(
+            onDismissRequest = onDismissRequest,
+            sheetState = sheetState,
+            dragHandle = null,
+            tonalElevation = 0.dp,
+            scrimColor = Color.Black.copy(alpha = 0.5f),
+            shape = RoundedCornerShape(10.dp),
+        ) {
+            Column (
+                modifier = Modifier.padding(start = 25.dp, end = 25.dp, top = 30.dp, bottom = 10.dp)
+            ) {
+                Row (
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = "Contact Form",
+                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.SemiBold)
+                    )
+                    Icon(
+                        imageVector = Icons.Outlined.Close,
+                        contentDescription = "Close form icon",
+                        modifier = Modifier.size(25.dp)
+                    )
+                }
+            }
+        }
+    }
 }
