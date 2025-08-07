@@ -190,6 +190,17 @@ fun ContactFormSheet(
                 Spacer(modifier = Modifier.height(10.dp))
                 InputWithIcon(icon = Icons.Outlined.Home, input = name, placeholder = "Message")
                 Spacer(modifier = Modifier.height(30.dp))
+                Button(
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = {  },
+                    shape = RoundedCornerShape(5.dp),
+                    contentPadding = PaddingValues(vertical = 15.dp),
+                    colors = ButtonDefaults.buttonColors(contentColor = Color.White, containerColor = LightBlueColor),
+                ) {
+                    Text("Send",
+                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.W400)
+                    )
+                }
             }
         }
     }
