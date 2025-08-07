@@ -99,6 +99,10 @@ fun PremiumScreen() {
                     Spacer(modifier = Modifier.height(30.dp))
                 }
             }
+            Subscription(title = "Rs 1,750.00 / Month", description = "Monthly Subscription", icon = Icons.Outlined.CheckCircle)
+            Spacer(modifier = Modifier.height(10.dp))
+            Subscription(title = "Rs 10,100.00 / Year", description = "Annual Subscription", icon = Icons.Outlined.Check)
+            Spacer(modifier = Modifier.height(20.dp))
         }
     }
 }
