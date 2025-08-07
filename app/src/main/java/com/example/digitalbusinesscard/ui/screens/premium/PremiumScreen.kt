@@ -49,6 +49,7 @@ import com.example.digitalbusinesscard.ui.theme.BackgroundColor
 
 @Composable
 fun PremiumScreen() {
+    val scrollState = rememberScrollState()
     val premiumItems = listOf(
         Menu(Icons.Outlined.List, "2 weeks free testing", "With first subscription"),
         Menu(Icons.Outlined.Person, "Add-free", ""),
@@ -79,7 +80,7 @@ fun PremiumScreen() {
         Spacer(modifier = Modifier.height(20.dp))
 
         Column (
-            modifier = Modifier.padding(horizontal = 12.dp)
+            modifier = Modifier.padding(horizontal = 12.dp).verticalScroll(scrollState)
         ) {
             Text(
                 text = "Network on a new level",
