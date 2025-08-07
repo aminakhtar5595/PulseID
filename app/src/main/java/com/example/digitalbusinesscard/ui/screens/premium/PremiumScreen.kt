@@ -103,6 +103,22 @@ fun PremiumScreen() {
             Spacer(modifier = Modifier.height(10.dp))
             Subscription(title = "Rs 10,100.00 / Year", description = "Annual Subscription", icon = Icons.Outlined.Check)
             Spacer(modifier = Modifier.height(20.dp))
+
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {  },
+                shape = RoundedCornerShape(10.dp),
+                contentPadding = PaddingValues(vertical = 15.dp),
+                colors = ButtonDefaults.buttonColors(contentColor = Color.White, containerColor = Color.Red),
+            ) {
+                Text("Test now for free",
+                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.SemiBold)
+                )
+            }
+            Spacer(modifier = Modifier.height(10.dp))
+            Text("Then Rs 1,750 / Month. The plans are automatically renewed. Cancelable anytime. By clicking on \"Test now for free\" or \"Subscribe now\" you agree to our Subscription conditions",
+                style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Light, textAlign = TextAlign.Center)
+            )
         }
     }
 }
