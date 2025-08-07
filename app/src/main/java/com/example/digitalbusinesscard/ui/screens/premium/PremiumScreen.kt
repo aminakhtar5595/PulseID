@@ -183,6 +183,13 @@ fun ContactFormSheet(
                         modifier = Modifier.size(25.dp)
                     )
                 }
+                Spacer(modifier = Modifier.height(10.dp))
+                InputWithIcon(icon = Icons.Outlined.Person, input = name, placeholder = "Name")
+                Spacer(modifier = Modifier.height(10.dp))
+                InputWithIcon(icon = Icons.Outlined.Email, input = name, placeholder = "Email")
+                Spacer(modifier = Modifier.height(10.dp))
+                InputWithIcon(icon = Icons.Outlined.Home, input = name, placeholder = "Message")
+                Spacer(modifier = Modifier.height(30.dp))
             }
         }
     }
