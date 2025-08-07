@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.digitalbusinesscard.ui.theme.LightBlueColor
 
 @Composable
 fun Subscription(
@@ -26,7 +27,7 @@ fun Subscription(
     icon: ImageVector
 ) {
     Row (
-        modifier = Modifier.fillMaxWidth().border(2.dp, color = Color.Black, RoundedCornerShape(15.dp)).padding(horizontal = 22.dp, vertical = 18.dp),
+        modifier = Modifier.fillMaxWidth().border(2.dp, color = LightBlueColor, RoundedCornerShape(15.dp)).padding(horizontal = 22.dp, vertical = 18.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -43,7 +44,7 @@ fun Subscription(
         Icon(
             imageVector = icon,
             contentDescription = title,
-            tint = Color.Unspecified
+            tint = LightBlueColor
         )
     }
 }

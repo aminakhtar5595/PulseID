@@ -39,6 +39,7 @@ import com.example.digitalbusinesscard.ui.components.IconTextRow
 import com.example.digitalbusinesscard.ui.components.Subscription
 import com.example.digitalbusinesscard.ui.model.Menu
 import com.example.digitalbusinesscard.ui.theme.BackgroundColor
+import com.example.digitalbusinesscard.ui.theme.LightBlueColor
 
 @Composable
 fun PremiumScreen() {
@@ -79,7 +80,7 @@ fun PremiumScreen() {
                 text = "Network on a new level",
                 style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
             )
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(15.dp))
             Text(
                 text = "Present yourself professionally and get the most out of your digital business card",
                 style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Light, color = Color.Gray, fontSize = 18.sp)
@@ -89,7 +90,7 @@ fun PremiumScreen() {
                 modifier = Modifier.padding(horizontal = 12.dp)
             ) {
                 premiumItems.forEach { menu ->
-                    IconTextRow(menu)
+                    IconTextRow(menu, iconColor = LightBlueColor)
                     Spacer(modifier = Modifier.height(30.dp))
                 }
             }
@@ -103,7 +104,7 @@ fun PremiumScreen() {
                 onClick = {  },
                 shape = RoundedCornerShape(10.dp),
                 contentPadding = PaddingValues(vertical = 15.dp),
-                colors = ButtonDefaults.buttonColors(contentColor = Color.White, containerColor = Color.Red),
+                colors = ButtonDefaults.buttonColors(contentColor = Color.White, containerColor = LightBlueColor),
             ) {
                 Text("Test now for free",
                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.SemiBold)

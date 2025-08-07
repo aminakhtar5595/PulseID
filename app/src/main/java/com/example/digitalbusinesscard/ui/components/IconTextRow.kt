@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 import com.example.digitalbusinesscard.ui.model.Menu
 
 @Composable
-fun IconTextRow(menu: Menu) {
+fun IconTextRow(menu: Menu, iconColor: Color = Color.DarkGray) {
     Row (
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(20.dp),
@@ -26,19 +26,19 @@ fun IconTextRow(menu: Menu) {
             imageVector = menu.icon,
             contentDescription = menu.title,
             modifier = Modifier.size(30.dp),
-            tint = Color.DarkGray
+            tint = iconColor
         )
 
         Column {
             Text(
                 text = menu.title,
-                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.W400)
+                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Light)
             )
             if (menu.description.isNotBlank()) {
                 Text(
                     text = menu.description,
                     style = MaterialTheme.typography.titleLarge.copy(
-                        fontWeight = FontWeight.W300,
+                        fontWeight = FontWeight.W200,
                         fontSize = 18.sp,
                         color = Color.DarkGray
                     )

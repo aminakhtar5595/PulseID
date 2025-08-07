@@ -12,3 +12,4 @@ val Pink40 = Color(0xFF7D5260)
 
 val BackgroundColor = Color(0xFFefefef)
 val BorderColor = Color(0xFFdedede)
+val LightBlueColor = Color(0xFF237cab)
