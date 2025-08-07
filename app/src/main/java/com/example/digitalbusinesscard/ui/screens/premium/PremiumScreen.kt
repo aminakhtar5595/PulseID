@@ -49,6 +49,12 @@ import com.example.digitalbusinesscard.ui.theme.BackgroundColor
 
 @Composable
 fun PremiumScreen() {
+    val premiumItems = listOf(
+        Menu(Icons.Outlined.List, "2 weeks free testing", "With first subscription"),
+        Menu(Icons.Outlined.Person, "Add-free", ""),
+        Menu(Icons.Outlined.Share, "Unlimited business card scans", ""),
+        Menu(Icons.Outlined.DateRange, "Card Homescreen Widget", "")
+    )
     Column (
         modifier = Modifier
             .fillMaxSize()
@@ -85,6 +91,14 @@ fun PremiumScreen() {
                 style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Light, color = Color.Gray, fontSize = 18.sp)
             )
             Spacer(modifier = Modifier.height(20.dp))
+            Column (
+                modifier = Modifier.padding(horizontal = 12.dp)
+            ) {
+                premiumItems.forEach { menu ->
+                    IconTextRow(menu)
+                    Spacer(modifier = Modifier.height(30.dp))
+                }
+            }
         }
     }
 }
