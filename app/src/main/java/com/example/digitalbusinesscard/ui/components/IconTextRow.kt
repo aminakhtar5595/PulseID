@@ -34,10 +34,16 @@ fun IconTextRow(menu: Menu) {
                 text = menu.title,
                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.W400)
             )
-            Text(
-                text = menu.description,
-                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.W300, fontSize = 18.sp, color = Color.DarkGray)
-            )
+            if (menu.description.isNotBlank()) {
+                Text(
+                    text = menu.description,
+                    style = MaterialTheme.typography.titleLarge.copy(
+                        fontWeight = FontWeight.W300,
+                        fontSize = 18.sp,
+                        color = Color.DarkGray
+                    )
+                )
+            }
         }
     }
 }
