@@ -287,12 +287,12 @@ fun HomeView(dismiss: () -> Unit) {
                 .padding(vertical = 40.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.home_icon),
-                contentDescription = "Home Icon",
-                modifier = Modifier
-                    .size(250.dp)
-            )
+//            Image(
+//                painter = painterResource(id = R.drawable.home_icon),
+//                contentDescription = "Home Icon",
+//                modifier = Modifier
+//                    .size(250.dp)
+//            )
 
             Spacer(modifier = Modifier.height(40.dp))
             Button(
