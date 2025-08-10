@@ -19,4 +19,27 @@ fun OnboardingFlow() {
         Triple(R.drawable.onboarding_icon_three, "Profile data", "Add your name, email address, phone number, company name and much more..."),
         Triple(R.drawable.onboarding_icon_four, "Start now", "Create your personalized QR Code now!"),
     )
+    val isLastPage = currentPage == onboardingItems.lastIndex
+    val isFirstPage = currentPage == 0
+
+    val (image, title, desc) = onboardingItems[currentPage]
+
+    OnboardingScreen(
+        imageRes = image,
+        title = title,
+        description = desc,
+        currentPage = currentPage,
+        totalPages = onboardingItems.size,
+
+        onSkipClick = {
+            if (isFirstPage) {
+                navController.navigate("home") {
+                    popUpTo("onboarding") { inclusive = true }
+                }
+            } else {
+                currentPage--
+            }
+        },
+        leftLabel = if (isFirstPage) "Skip" else "Back",
+    )
 }
