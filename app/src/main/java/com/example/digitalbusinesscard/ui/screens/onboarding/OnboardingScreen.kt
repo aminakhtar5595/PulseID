@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-//import com.example.digitalbusinesscard.ui.components.PageIndicator
+import com.example.digitalbusinesscard.ui.components.PageIndicator
 import com.example.digitalbusinesscard.ui.theme.BackgroundColor
 import com.example.digitalbusinesscard.ui.theme.LightBlueColor
 
@@ -69,6 +69,20 @@ fun OnboardingScreen(
                 ),
                 modifier = Modifier.fillMaxWidth()
             )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+                .align(Alignment.BottomEnd),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            Text(
+                text = leftLabel,
+                style = MaterialTheme.typography.bodyLarge.copy(color = LightBlueColor),
+                modifier = Modifier.clickable { onSkipClick() }.padding(start = 50.dp)
+            )
+            PageIndicator(currentPage = currentPage, totalPages = totalPages)
         }
     }
 }
