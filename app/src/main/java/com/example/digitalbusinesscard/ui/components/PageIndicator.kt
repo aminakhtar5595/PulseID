@@ -16,5 +16,23 @@ import com.example.digitalbusinesscard.R
 
 @Composable
 fun PageIndicator(currentPage: Int, totalPages: Int) {
-
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.Bottom
+    ) {
+        repeat(totalPages) { index ->
+            if (index == currentPage) {
+                Image(
+                    painter = painterResource(id = R.drawable.active_indicator),
+                    contentDescription = "Onboarding Image",
+                    modifier = Modifier.size(25.dp)
+                )
+            } else {
+                Text(
+                    text = "●",
+                    style = MaterialTheme.typography.titleLarge.copy(color = Color.LightGray)
+                )
+            }
+        }
+    }
 }
