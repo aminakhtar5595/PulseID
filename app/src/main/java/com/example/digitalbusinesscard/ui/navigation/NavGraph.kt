@@ -4,7 +4,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.digitalbusinesscard.ui.screens.menu.MenuScreen
-import com.example.digitalbusinesscard.ui.screens.onboarding.OnboardingScreen
+import com.example.digitalbusinesscard.ui.screens.onboarding.OnboardingFlow
 import com.example.digitalbusinesscard.ui.screens.premium.PremiumScreen
 import com.example.digitalbusinesscard.ui.screens.splash.SplashScreen
 
@@ -15,7 +15,7 @@ fun AppNavGraph(navController: NavHostController) {
         composable(Screen.Splash.route) { SplashScreen() }
         composable(Screen.Menu.route) { MenuScreen() }
         composable(Screen.Premium.route) { PremiumScreen() }
-        composable(Screen.Onboarding.route) { OnboardingScreen() }
+        composable(Screen.Onboarding.route) { OnboardingFlow() }
     }
 }
 
