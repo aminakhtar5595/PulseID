@@ -36,5 +36,39 @@ fun OnboardingScreen(
     onSkipClick: () -> Unit,
     leftLabel: String,
 ) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = BackgroundColor).padding(horizontal = 40.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Image(
+                painter = painterResource(id = imageRes),
+                contentDescription = "Onboarding Image",
+                modifier = Modifier.size(250.dp),
+            )
 
+            Text(
+                text = title,
+                style = MaterialTheme.typography.headlineMedium.copy(
+                    fontWeight = FontWeight.W500,
+                    textAlign = TextAlign.Start
+                ),
+                modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp, top = 60.dp)
+            )
+
+            Text(
+                text = description,
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    color = Color.DarkGray,
+                    fontWeight = FontWeight.Light,
+                    fontSize = 20.sp
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
 }
