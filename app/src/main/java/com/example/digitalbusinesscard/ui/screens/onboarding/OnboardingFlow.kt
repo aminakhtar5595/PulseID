@@ -30,7 +30,7 @@ fun OnboardingFlow() {
         description = desc,
         currentPage = currentPage,
         totalPages = onboardingItems.size,
-
+        isLastPage = isLastPage,
         onSkipClick = {
             if (isFirstPage) {
                 navController.navigate("home") {
@@ -40,6 +40,6 @@ fun OnboardingFlow() {
                 currentPage--
             }
         },
-        leftLabel = if (isFirstPage) "Skip" else "Back",
+        leftLabel = if (isLastPage) "" else "Skip",
     )
 }
