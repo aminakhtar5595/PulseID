@@ -12,7 +12,7 @@ import com.example.digitalbusinesscard.ui.screens.splash.SplashScreen
 @Composable
 fun AppNavGraph(navController: NavHostController) {
 
-    NavHost(navController = navController, startDestination = Screen.Onboarding.route) {
+    NavHost(navController = navController, startDestination = Screen.Contacts.route) {
         composable(Screen.Splash.route) { SplashScreen() }
         composable(Screen.Menu.route) { MenuScreen() }
         composable(Screen.Premium.route) { PremiumScreen() }
