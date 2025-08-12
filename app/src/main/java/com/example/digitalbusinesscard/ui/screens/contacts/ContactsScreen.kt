@@ -2,7 +2,6 @@ package com.example.digitalbusinesscard.ui.screens.contacts
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -15,7 +14,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Person
@@ -36,6 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.digitalbusinesscard.R
+import com.example.digitalbusinesscard.ui.components.ButtonWithIcon
 import com.example.digitalbusinesscard.ui.theme.BackgroundColor
 import com.example.digitalbusinesscard.ui.theme.BorderColor
 import com.example.digitalbusinesscard.ui.theme.LightBlueColor
@@ -92,7 +91,9 @@ fun ContactsScreen() {
 
         Column (
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize().padding(horizontal = 40.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 40.dp),
             verticalArrangement = Arrangement.Center
         ) {
             Image(
@@ -101,23 +102,7 @@ fun ContactsScreen() {
                 modifier = Modifier.size(200.dp)
             )
             Spacer(modifier = Modifier.height(20.dp))
-            Button(
-                onClick = {  },
-                modifier = Modifier
-                    .fillMaxWidth(0.7f)
-                    .border(1.dp, color = Color.LightGray, shape = RoundedCornerShape(8.dp)),
-                colors = ButtonDefaults.buttonColors(contentColor = LightBlueColor, containerColor = Color.Transparent),
-                contentPadding = PaddingValues(vertical = 15.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.Settings,
-                    contentDescription = "Scan icon",
-                    modifier = Modifier.size(28.dp)
-                )
-                Text("SCAN",
-                    style = MaterialTheme.typography.titleLarge.copy(fontSize = 18.sp), modifier = Modifier.padding(start = 10.dp)
-                )
-            }
+            ButtonWithIcon(title = "SCAN", icon = Icons.Outlined.Settings, contentColor = LightBlueColor)
             Spacer(modifier = Modifier.height(15.dp))
 
             BoxWithConstraints {
@@ -145,23 +130,7 @@ fun ContactsScreen() {
                 }
             }
             Spacer(modifier = Modifier.height(15.dp))
-            Button(
-                onClick = {  },
-                modifier = Modifier
-                    .fillMaxWidth(0.7f)
-                    .border(1.dp, color = Color.LightGray, shape = RoundedCornerShape(8.dp)),
-                colors = ButtonDefaults.buttonColors(contentColor = Color.DarkGray, containerColor = Color.Transparent),
-                contentPadding = PaddingValues(vertical = 15.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.Person,
-                    contentDescription = "Add contact icon",
-                    modifier = Modifier.size(28.dp)
-                )
-                Text("ADD CONTACT",
-                    style = MaterialTheme.typography.titleLarge.copy(fontSize = 18.sp), modifier = Modifier.padding(start = 10.dp)
-                )
-            }
+            ButtonWithIcon(title = "ADD CONTACT", icon = Icons.Outlined.Person)
             Spacer(modifier = Modifier.height(20.dp))
             Text(
                 text = "Keep business and private contacts separate. Import business contacts into PulseID for a clear overview.",
