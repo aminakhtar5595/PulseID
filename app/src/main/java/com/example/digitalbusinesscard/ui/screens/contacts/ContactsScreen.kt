@@ -89,5 +89,84 @@ fun ContactsScreen() {
             }
         }
         HorizontalDivider(thickness = 1.5.dp, color = BorderColor)
+
+        Column (
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize().padding(horizontal = 40.dp),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.contacts_icon),
+                contentDescription = "Contact image",
+                modifier = Modifier.size(200.dp)
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            Button(
+                onClick = {  },
+                modifier = Modifier
+                    .fillMaxWidth(0.7f)
+                    .border(1.dp, color = Color.LightGray, shape = RoundedCornerShape(8.dp)),
+                colors = ButtonDefaults.buttonColors(contentColor = LightBlueColor, containerColor = Color.Transparent),
+                contentPadding = PaddingValues(vertical = 15.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Settings,
+                    contentDescription = "Scan icon",
+                    modifier = Modifier.size(28.dp)
+                )
+                Text("SCAN",
+                    style = MaterialTheme.typography.titleLarge.copy(fontSize = 18.sp), modifier = Modifier.padding(start = 10.dp)
+                )
+            }
+            Spacer(modifier = Modifier.height(15.dp))
+
+            BoxWithConstraints {
+                val dividerWidth = maxWidth * 0.2f
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    HorizontalDivider(
+                        thickness = 1.5.dp,
+                        color = Color.LightGray,
+                        modifier = Modifier.width(dividerWidth)
+                    )
+                    Text(
+                        text = "Or",
+                        style = MaterialTheme.typography.bodyLarge.copy(color = Color.Gray, fontSize = 18.sp), modifier = Modifier.padding(horizontal = 8.dp)
+                    )
+                    HorizontalDivider(
+                        thickness = 1.5.dp,
+                        color = Color.LightGray,
+                        modifier = Modifier.width(dividerWidth)
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.height(15.dp))
+            Button(
+                onClick = {  },
+                modifier = Modifier
+                    .fillMaxWidth(0.7f)
+                    .border(1.dp, color = Color.LightGray, shape = RoundedCornerShape(8.dp)),
+                colors = ButtonDefaults.buttonColors(contentColor = Color.DarkGray, containerColor = Color.Transparent),
+                contentPadding = PaddingValues(vertical = 15.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Person,
+                    contentDescription = "Add contact icon",
+                    modifier = Modifier.size(28.dp)
+                )
+                Text("ADD CONTACT",
+                    style = MaterialTheme.typography.titleLarge.copy(fontSize = 18.sp), modifier = Modifier.padding(start = 10.dp)
+                )
+            }
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = "Keep business and private contacts separate. Import business contacts into PulseID for a clear overview.",
+                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Light, color = Color.DarkGray, textAlign = TextAlign.Center)
+            )
+        }
     }
 }
