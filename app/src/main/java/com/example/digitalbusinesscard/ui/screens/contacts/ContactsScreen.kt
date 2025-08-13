@@ -46,6 +46,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.digitalbusinesscard.R
 import com.example.digitalbusinesscard.ui.components.ButtonWithIcon
+import com.example.digitalbusinesscard.ui.components.ContactCard
 import com.example.digitalbusinesscard.ui.model.Menu
 import com.example.digitalbusinesscard.ui.theme.BackgroundColor
 import com.example.digitalbusinesscard.ui.theme.BorderColor
@@ -116,7 +117,8 @@ fun ContactsScreen() {
             Column (
                 modifier = Modifier.fillMaxSize().background(color = BackgroundColor)
             ) {
-
+                ContactCard(initial = "A", image = R.drawable.app_logo, title = "Amin Akhtar", company = "Webook")
+                ContactCard(initial = "S", image = R.drawable.app_logo, title = "Saim Akhtar", company = "CVSparkle")
             }
         } else {
             noData()
