@@ -52,6 +52,6 @@ fun ContactCard(initial: String, image: Int, title: String, company: String) {
                 )
             }
         }
-//        TextLabel()
+        TextLabel()
     }
 }
