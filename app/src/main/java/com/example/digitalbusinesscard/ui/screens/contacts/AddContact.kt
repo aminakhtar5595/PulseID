@@ -87,6 +87,49 @@ fun AddContact() {
                     modifier = Modifier.fillMaxWidth()
                 )
             }
+
+            Spacer(modifier = Modifier.height(20.dp))
+            HorizontalDivider(thickness = 1.5.dp, color = BorderColor)
+            Spacer(modifier = Modifier.height(30.dp))
+
+            Column(
+                modifier = Modifier.fillMaxSize().verticalScroll(scrollState).padding(horizontal = 20.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.add_image),
+                    contentDescription = "Add Contact Image",
+                    modifier = Modifier.size(200.dp)
+                )
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                InputWithIcon(icon = Icons.Outlined.Person, input = firstName, placeholder = "First Name")
+                Spacer(modifier = Modifier.height(20.dp))
+
+                InputWithIcon(icon = Icons.Outlined.Person, input = lastName, placeholder = "Last Name")
+                Spacer(modifier = Modifier.height(20.dp))
+
+                InputWithIcon(icon = Icons.Outlined.Email, input = email, placeholder = "Email")
+                Spacer(modifier = Modifier.height(20.dp))
+
+                InputWithIcon(icon = Icons.Outlined.Phone, input = phone, placeholder = "Phone Number")
+                Spacer(modifier = Modifier.height(20.dp))
+
+                InputWithIcon(icon = Icons.Outlined.Info, input = job, placeholder = "Job")
+                Spacer(modifier = Modifier.height(20.dp))
+
+                InputWithIcon(icon = Icons.Outlined.Settings, input = department, placeholder = "Department")
+                Spacer(modifier = Modifier.height(20.dp))
+
+                InputWithIcon(icon = Icons.Outlined.Home, input = company, placeholder = "Company")
+                Spacer(modifier = Modifier.height(20.dp))
+
+                InputWithIcon(icon = Icons.Outlined.DateRange, input = website, placeholder = "Website")
+                Spacer(modifier = Modifier.height(80.dp))
+            }
         }
+
     }
 }
