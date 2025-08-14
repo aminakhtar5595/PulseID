@@ -130,6 +130,33 @@ fun AddContact() {
                 Spacer(modifier = Modifier.height(80.dp))
             }
         }
+        Column(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .background(color = BackgroundColor)
+        ) {
+            HorizontalDivider(thickness = 1.5.dp, color = BorderColor)
+            Spacer(modifier = Modifier.height(20.dp))
 
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "CANCEL",
+                    style = MaterialTheme.typography.titleMedium
+                )
+
+                Text(
+                    text = "|",
+                    style = MaterialTheme.typography.titleLarge
+                )
+                Text(
+                    text = "SAVE",
+                    style = MaterialTheme.typography.titleMedium
+                )
+            }
+        }
     }
 }
