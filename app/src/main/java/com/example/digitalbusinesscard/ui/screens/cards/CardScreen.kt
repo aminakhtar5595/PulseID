@@ -1,14 +1,13 @@
 package com.example.digitalbusinesscard.ui.screens.cards
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,16 +16,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.Create
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -38,18 +30,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import com.example.digitalbusinesscard.R
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
 import com.example.digitalbusinesscard.ui.components.ButtonWithIcon
-import com.example.digitalbusinesscard.ui.components.ContactCard
 import com.example.digitalbusinesscard.ui.theme.BackgroundColor
 import com.example.digitalbusinesscard.ui.theme.LightBlueColor
 
@@ -62,20 +49,16 @@ fun CardScreen() {
             .background(color = BackgroundColor)
             .padding(vertical = 20.dp)
     ) {
-        if (!isData) {
-            Column (
-                modifier = Modifier.fillMaxSize().background(color = BackgroundColor)
-            ) {
-
-            }
+        if (isData) {
+            CardView()
         } else {
-            noData()
+            NoData()
         }
     }
 }
 
 @Composable
-fun noData() {
+fun NoData() {
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -118,5 +101,72 @@ fun noData() {
         }
         Spacer(modifier = Modifier.height(15.dp))
         ButtonWithIcon(title = "CONTACTS", icon = Icons.Outlined.Person, widthFraction = 0.9f)
+    }
+}
+
+@Composable
+fun CardView() {
+    Column(
+        modifier = Modifier.padding(horizontal = 20.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.MoreVert,
+                contentDescription = "More options",
+                modifier = Modifier.size(30.dp)
+            )
+        }
+        Spacer(modifier = Modifier.height(20.dp))
+        Box(
+            modifier = Modifier
+                .padding(horizontal = 25.dp)
+                .background(Color.White, RoundedCornerShape(10.dp))
+        ) {
+            Column(
+                modifier = Modifier.padding(20.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.add_image),
+                    contentDescription = "User profile picture",
+                    modifier = Modifier.size(150.dp)
+                )
+
+                Spacer(modifier = Modifier.height(15.dp))
+
+                Text(
+                    text = "Amin",
+                    style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold)
+                )
+                Text(
+                    text = "Akhtar",
+                    style = MaterialTheme.typography.headlineMedium
+                )
+
+                Spacer(modifier = Modifier.height(15.dp))
+
+                Box(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    HorizontalDivider(
+                        thickness = 3.dp,
+                        color = Color.Black,
+                        modifier = Modifier.fillMaxWidth(0.3f)
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(15.dp))
+
+                Image(
+                    painter = painterResource(id = R.drawable.qr_image),
+                    contentDescription = "User QR code",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(1f)
+                )
+            }
+        }
     }
 }
