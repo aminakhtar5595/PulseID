@@ -160,5 +160,7 @@ fun ContactInfoScreen() {
                 Spacer(modifier = Modifier.height(20.dp))
             }
         }
+        Spacer(modifier = Modifier.height(15.dp))
+        ButtonWithIcon(title = "Save to contacts", icon = Icons.Outlined.Settings, contentColor = LightBlueColor, widthFraction = 1f)
     }
 }
