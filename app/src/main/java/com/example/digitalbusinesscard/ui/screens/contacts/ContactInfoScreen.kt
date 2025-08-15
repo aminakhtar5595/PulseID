@@ -97,6 +97,41 @@ fun ContactInfoScreen() {
             }
         }
 
+        Spacer(modifier = Modifier.height(20.dp))
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.add_image),
+                contentDescription = "Contact Image",
+                modifier = Modifier.size(200.dp)
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "Amin Akhtar",
+                style = MaterialTheme.typography.headlineMedium
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(20.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.whatsapp_icon),
+                    contentDescription = "WhatsApp Icon"
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.message_icon),
+                    contentDescription = "Message Icon"
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.email_icon),
+                    contentDescription = "Email Icon"
+                )
+            }
+        }
+
 
     }
 }
