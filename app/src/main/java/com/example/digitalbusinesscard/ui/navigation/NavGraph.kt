@@ -1,5 +1,6 @@
 package com.example.digitalbusinesscard.ui.navigation
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,9 +15,8 @@ import com.example.digitalbusinesscard.ui.screens.premium.PremiumScreen
 import com.example.digitalbusinesscard.ui.screens.splash.SplashScreen
 
 @Composable
-fun AppNavGraph(navController: NavHostController) {
-
-    NavHost(navController = navController, startDestination = Screen.Card.route) {
+fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
+    NavHost(navController = navController, startDestination = Screen.Card.route, modifier = modifier) {
         composable(Screen.Splash.route) { SplashScreen() }
         composable(Screen.Menu.route) { MenuScreen() }
         composable(Screen.Premium.route) { PremiumScreen() }
