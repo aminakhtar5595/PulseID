@@ -146,6 +146,19 @@ fun ContactInfoScreen() {
                 Spacer(modifier = Modifier.height(20.dp))
             }
         }
-
+        Spacer(modifier = Modifier.height(15.dp))
+        Column (
+            modifier = Modifier.background(color = BorderColor, shape = RoundedCornerShape(3)).fillMaxWidth().padding(top = 25.dp, start = 20.dp, end = 20.dp, bottom = 10.dp),
+        ) {
+            Text(
+                text = "Extra Info",
+                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 20.sp)
+            )
+            Spacer(modifier = Modifier.height(30.dp))
+            contactItems.subList(6, 8).forEach { contact ->
+                IconTextRow(contact)
+                Spacer(modifier = Modifier.height(20.dp))
+            }
+        }
     }
 }
