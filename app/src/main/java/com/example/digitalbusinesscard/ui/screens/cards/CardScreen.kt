@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Settings
@@ -37,8 +38,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.digitalbusinesscard.ui.components.ButtonWithIcon
+import com.example.digitalbusinesscard.ui.components.PageIndicator
 import com.example.digitalbusinesscard.ui.theme.BackgroundColor
 import com.example.digitalbusinesscard.ui.theme.LightBlueColor
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.rememberPagerState
 
 @Composable
 fun CardScreen() {
@@ -104,8 +109,13 @@ fun NoData() {
     }
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun CardView() {
+    val pagerState = rememberPagerState(initialPage = 0)
+    val currentPage = pagerState.currentPage
+    val totalPages = 2
+
     Column(
         modifier = Modifier.padding(horizontal = 20.dp)
     ) {
@@ -119,54 +129,94 @@ fun CardView() {
                 modifier = Modifier.size(30.dp)
             )
         }
-        Spacer(modifier = Modifier.height(20.dp))
-        Box(
+        Spacer(modifier = Modifier.height(10.dp))
+        HorizontalPager(
+            count = totalPages,
+            state = pagerState,
             modifier = Modifier
-                .padding(horizontal = 25.dp)
-                .background(Color.White, RoundedCornerShape(10.dp))
-        ) {
-            Column(
-                modifier = Modifier.padding(20.dp)
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.add_image),
-                    contentDescription = "User profile picture",
-                    modifier = Modifier.size(150.dp)
-                )
-
-                Spacer(modifier = Modifier.height(15.dp))
-
-                Text(
-                    text = "Amin",
-                    style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold)
-                )
-                Text(
-                    text = "Akhtar",
-                    style = MaterialTheme.typography.headlineMedium
-                )
-
-                Spacer(modifier = Modifier.height(15.dp))
-
-                Box(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    HorizontalDivider(
-                        thickness = 3.dp,
-                        color = Color.Black,
-                        modifier = Modifier.fillMaxWidth(0.3f)
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(15.dp))
-
-                Image(
-                    painter = painterResource(id = R.drawable.qr_image),
-                    contentDescription = "User QR code",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(1f)
-                )
+                .fillMaxWidth()
+                .weight(1f),
+        ) { page ->
+            when (page) {
+                0 -> CardFirstView()
+                1 -> CardSecondView()
             }
         }
+        Column (
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 10.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            PageIndicator(currentPage = currentPage, totalPages = totalPages)
+        }
     }
+}
+
+@Composable
+fun CardFirstView() {
+    Box(
+        modifier = Modifier
+            .padding(horizontal = 25.dp)
+            .background(Color.White, RoundedCornerShape(10.dp))
+    ) {
+        Column(
+            modifier = Modifier.padding(20.dp)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.add_image),
+                contentDescription = "User profile picture",
+                modifier = Modifier.size(120.dp)
+            )
+
+            Spacer(modifier = Modifier.height(15.dp))
+
+            Text(
+                text = "Amin",
+                style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold)
+            )
+            Text(
+                text = "Akhtar",
+                style = MaterialTheme.typography.headlineMedium
+            )
+
+            Spacer(modifier = Modifier.height(15.dp))
+
+            Box(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                HorizontalDivider(
+                    thickness = 3.dp,
+                    color = Color.Black,
+                    modifier = Modifier.fillMaxWidth(0.3f)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(15.dp))
+
+            Image(
+                painter = painterResource(id = R.drawable.qr_image),
+                contentDescription = "User QR code",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1f)
+            )
+        }
+    }
+}
+
+@Composable
+fun CardSecondView() {
+    Column (
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.new_card),
+            contentDescription = "Second profile picture",
+            modifier = Modifier.size(170.dp)
+        )
+        Spacer(modifier = Modifier.height(40.dp))
+        ButtonWithIcon(title = "ADD NEW CARD", icon = Icons.Outlined.Add, contentColor = LightBlueColor)
+    }
+
 }
