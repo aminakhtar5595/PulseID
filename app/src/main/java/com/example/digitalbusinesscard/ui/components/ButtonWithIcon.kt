@@ -22,12 +22,13 @@ import androidx.compose.ui.unit.sp
 fun ButtonWithIcon(
     contentColor: Color = Color.DarkGray,
     title: String,
-    icon: ImageVector
+    icon: ImageVector,
+    widthFraction: Float = 0.7f,
 ) {
     Button(
         onClick = {  },
         modifier = Modifier
-            .fillMaxWidth(0.7f)
+            .fillMaxWidth(widthFraction)
             .border(1.dp, color = Color.LightGray, shape = RoundedCornerShape(8.dp)),
         colors = ButtonDefaults.buttonColors(contentColor = contentColor, containerColor = Color.Transparent),
         contentPadding = PaddingValues(vertical = 15.dp)
