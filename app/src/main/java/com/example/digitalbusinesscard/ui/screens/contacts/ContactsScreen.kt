@@ -2,8 +2,10 @@ package com.example.digitalbusinesscard.ui.screens.contacts
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,12 +14,15 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.icons.outlined.List
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Button
@@ -38,6 +43,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -47,6 +53,7 @@ import androidx.compose.ui.unit.sp
 import com.example.digitalbusinesscard.R
 import com.example.digitalbusinesscard.ui.components.ButtonWithIcon
 import com.example.digitalbusinesscard.ui.components.ContactCard
+import com.example.digitalbusinesscard.ui.components.IconTextRow
 import com.example.digitalbusinesscard.ui.model.Menu
 import com.example.digitalbusinesscard.ui.theme.BackgroundColor
 import com.example.digitalbusinesscard.ui.theme.BorderColor
@@ -59,6 +66,7 @@ fun ContactsScreen() {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
     var addContactSheet by remember { mutableStateOf(false) }
+    var contactInoSheet by remember { mutableStateOf(true) }
     var isData by remember { mutableStateOf(true) }
     Column (
         modifier = Modifier
@@ -127,6 +135,10 @@ fun ContactsScreen() {
         AddContactSheet(showSheet = addContactSheet,
             sheetState = sheetState,
             onDismissRequest = { addContactSheet = false })
+
+        ContactInfoSheet(showSheet = contactInoSheet,
+            sheetState = sheetState,
+            onDismissRequest = { contactInoSheet = false })
     }
 }
 
@@ -235,5 +247,75 @@ fun noData() {
             text = "Keep business and private contacts separate. Import business contacts into PulseID for a clear overview.",
             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Light, color = Color.DarkGray, textAlign = TextAlign.Center)
         )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ContactInfoSheet(
+    showSheet: Boolean,
+    sheetState: SheetState,
+    onDismissRequest: () -> Unit
+) {
+    val contactItems = listOf(
+        Menu(Icons.Outlined.Add, "test@gmail.com", ""),
+        Menu(Icons.Outlined.Person, "+92333 2480781", ""),
+        Menu(Icons.Outlined.Settings, "Webook", "")
+    )
+    if (showSheet) {
+        ModalBottomSheet(
+            onDismissRequest = onDismissRequest,
+            sheetState = sheetState,
+            scrimColor = Color.Black.copy(alpha = 0.5f),
+            shape = RoundedCornerShape(10.dp),
+        ) {
+            Column (
+                modifier = Modifier.padding(horizontal = 25.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+//                Image(
+//                    painter = painterResource(id = R.drawable.add_image), // Replace with your image
+//                    contentDescription = "Profile Picture",
+//                    modifier = Modifier
+//                        .size(150.dp)
+//                        .clip(CircleShape)
+//                        .align(Alignment.CenterHorizontally)
+//                )
+                Text(
+                    text = "Amin Akhtar",
+                    style = MaterialTheme.typography.headlineMedium
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(20.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.whatsapp_icon),
+                        contentDescription = "WhatsApp Icon"
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.message_icon),
+                        contentDescription = "Message Icon"
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.email_icon),
+                        contentDescription = "Email Icon"
+                    )
+                }
+                Spacer(modifier = Modifier.height(40.dp))
+                Column (
+                    modifier = Modifier.background(color = BorderColor, shape = RoundedCornerShape(3)).fillMaxWidth().padding(top = 25.dp, start = 20.dp, end = 20.dp, bottom = 10.dp),
+                ) {
+                    contactItems.forEach { contact ->
+                        IconTextRow(contact)
+                        Spacer(modifier = Modifier.height(20.dp))
+                    }
+                }
+                Spacer(modifier = Modifier.height(15.dp))
+                ButtonWithIcon(title = "Open Detailed Contact", icon = Icons.Outlined.Settings, contentColor = LightBlueColor, widthFraction = 1f)
+                Spacer(modifier = Modifier.height(25.dp))
+            }
+        }
     }
 }
