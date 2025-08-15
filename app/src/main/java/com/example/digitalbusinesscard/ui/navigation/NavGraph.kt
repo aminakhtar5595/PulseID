@@ -3,6 +3,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.digitalbusinesscard.ui.screens.cards.CardScreen
 import com.example.digitalbusinesscard.ui.screens.contacts.AddContactScreen
 import com.example.digitalbusinesscard.ui.screens.contacts.ContactInfoScreen
 import com.example.digitalbusinesscard.ui.screens.contacts.ContactsScreen
@@ -14,7 +15,7 @@ import com.example.digitalbusinesscard.ui.screens.splash.SplashScreen
 @Composable
 fun AppNavGraph(navController: NavHostController) {
 
-    NavHost(navController = navController, startDestination = Screen.Contacts.route) {
+    NavHost(navController = navController, startDestination = Screen.Card.route) {
         composable(Screen.Splash.route) { SplashScreen() }
         composable(Screen.Menu.route) { MenuScreen() }
         composable(Screen.Premium.route) { PremiumScreen() }
@@ -22,6 +23,7 @@ fun AppNavGraph(navController: NavHostController) {
         composable(Screen.Contacts.route) { ContactsScreen() }
         composable(Screen.AddContact.route) { AddContactScreen() }
         composable(Screen.ContactInfo.route) { ContactInfoScreen() }
+        composable(Screen.Card.route) { CardScreen() }
     }
 }
 
@@ -34,5 +36,5 @@ sealed class Screen(val route: String) {
     object Contacts : Screen("contacts")
     object AddContact : Screen("add_contact")
     object ContactInfo : Screen("contact_info")
-
+    object Card : Screen("card")
 }
