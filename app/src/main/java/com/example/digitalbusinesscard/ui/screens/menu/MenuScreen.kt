@@ -79,7 +79,7 @@ fun MenuScreen() {
 
             menuItems.subList(0, 6).forEach { menu ->
                 IconTextRow(menu)
-                Spacer(modifier = Modifier.height(30.dp))
+                Spacer(modifier = Modifier.height(25.dp))
             }
             HorizontalDivider(thickness = 1.dp, color = BorderColor)
             Spacer(modifier = Modifier.height(20.dp))
@@ -90,7 +90,7 @@ fun MenuScreen() {
             Spacer(modifier = Modifier.height(20.dp))
             menuItems.subList(6, 9).forEach { menu ->
                 IconTextRow(menu)
-                Spacer(modifier = Modifier.height(30.dp))
+                Spacer(modifier = Modifier.height(25.dp))
             }
             HorizontalDivider(thickness = 1.dp, color = BorderColor)
             Spacer(modifier = Modifier.height(20.dp))
@@ -101,7 +101,7 @@ fun MenuScreen() {
             Spacer(modifier = Modifier.height(20.dp))
             menuItems.subList(9, 10).forEach { menu ->
                 IconTextRow(menu)
-                Spacer(modifier = Modifier.height(30.dp))
+                Spacer(modifier = Modifier.height(25.dp))
             }
             HorizontalDivider(thickness = 1.dp, color = BorderColor)
             Spacer(modifier = Modifier.height(20.dp))
@@ -112,7 +112,7 @@ fun MenuScreen() {
             Spacer(modifier = Modifier.height(20.dp))
             menuItems.subList(10, 12).forEach { menu ->
                 IconTextRow(menu)
-                Spacer(modifier = Modifier.height(30.dp))
+                Spacer(modifier = Modifier.height(25.dp))
             }
             HorizontalDivider(thickness = 1.dp, color = BorderColor)
             Spacer(modifier = Modifier.height(20.dp))
@@ -123,7 +123,7 @@ fun MenuScreen() {
             Spacer(modifier = Modifier.height(20.dp))
             menuItems.subList(12, 15).forEach { menu ->
                 IconTextRow(menu)
-                Spacer(modifier = Modifier.height(30.dp))
+                Spacer(modifier = Modifier.height(25.dp))
             }
             HorizontalDivider(thickness = 1.dp, color = BorderColor)
             Spacer(modifier = Modifier.height(20.dp))

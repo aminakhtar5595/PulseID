@@ -1,5 +1,6 @@
 package com.example.digitalbusinesscard.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,32 +16,33 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.digitalbusinesscard.ui.model.Menu
+import com.example.digitalbusinesscard.ui.theme.LightBlueColor
 
 @Composable
-fun IconTextRow(menu: Menu, iconColor: Color = Color.DarkGray) {
+fun IconTextRow(menu: Menu, iconColor: Color = Color.Gray) {
     Row (
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(20.dp),
+        horizontalArrangement = Arrangement.spacedBy(25.dp)
     ) {
         Icon(
             imageVector = menu.icon,
             contentDescription = menu.title,
-            modifier = Modifier.size(30.dp),
+            modifier = Modifier.size(25.dp),
             tint = iconColor
         )
 
         Column {
             Text(
                 text = menu.title,
-                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Light)
+                style = MaterialTheme.typography.titleLarge.copy(fontSize = 19.sp, color = Color.DarkGray)
             )
             if (menu.description.isNotBlank()) {
                 Text(
                     text = menu.description,
                     style = MaterialTheme.typography.titleLarge.copy(
-                        fontWeight = FontWeight.W200,
+//                        fontWeight = FontWeight.W200,
                         fontSize = 18.sp,
-                        color = Color.DarkGray
+                        color = Color.Gray
                     )
                 )
             }
