@@ -55,8 +55,10 @@ fun OnboardingScreen(
         if (isLastPage) {
             Spacer(modifier = Modifier.height(40.dp))
             Button(
-                modifier = Modifier.fillMaxWidth().padding(15.dp),
-                onClick = onStartClick,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(15.dp),
+                onClick = { onStartClick() },
                 shape = RoundedCornerShape(5.dp),
                 contentPadding = PaddingValues(vertical = 12.dp),
                 colors = ButtonDefaults.buttonColors(
