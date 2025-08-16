@@ -13,13 +13,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.digitalbusinesscard.ui.model.Menu
 import com.example.digitalbusinesscard.ui.theme.LightBlueColor
 
 @Composable
-fun IconTextRow(menu: Menu, iconColor: Color = Color.Gray) {
+fun IconTextRow(menu: Menu, iconColor: Color = Color.Gray, descriptionFontSize: TextUnit = 18.sp) {
     Row (
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(25.dp)
@@ -40,8 +41,7 @@ fun IconTextRow(menu: Menu, iconColor: Color = Color.Gray) {
                 Text(
                     text = menu.description,
                     style = MaterialTheme.typography.titleLarge.copy(
-//                        fontWeight = FontWeight.W200,
-                        fontSize = 18.sp,
+                        fontSize = descriptionFontSize,
                         color = Color.Gray
                     )
                 )

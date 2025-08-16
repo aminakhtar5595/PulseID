@@ -27,18 +27,18 @@ fun Subscription(
     icon: ImageVector
 ) {
     Row (
-        modifier = Modifier.fillMaxWidth().border(2.dp, color = LightBlueColor, RoundedCornerShape(15.dp)).padding(horizontal = 22.dp, vertical = 18.dp),
+        modifier = Modifier.fillMaxWidth().border(2.dp, color = LightBlueColor, RoundedCornerShape(15.dp)).padding(horizontal = 20.dp, vertical = 15.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column {
             Text(
                 text = title,
-                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Light)
+                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Light, fontSize = 18.sp)
             )
             Text(
                 text = description,
-                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Light, color = Color.Gray, fontSize = 20.sp)
+                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Light, color = Color.Gray, fontSize = 18.sp)
             )
         }
         Icon(
