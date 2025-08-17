@@ -2,6 +2,7 @@ package com.example.digitalbusinesscard.ui.screens.cards
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -38,13 +39,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.digitalbusinesscard.R
 import com.example.digitalbusinesscard.ui.components.InputWithIcon
 import com.example.digitalbusinesscard.ui.theme.BackgroundColor
 import com.example.digitalbusinesscard.ui.theme.BorderColor
 
 @Composable
-fun AddCardScreen() {
+fun AddCardScreen(navController: NavController) {
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -71,7 +73,7 @@ fun AddCardScreen() {
                 Icon(
                     imageVector = Icons.Outlined.ArrowBack,
                     contentDescription = "Back arrow icon",
-                    modifier = Modifier.size(30.dp)
+                    modifier = Modifier.size(30.dp).clickable { navController.popBackStack() }
                 )
                 Text(
                     text = "Add new Card",
@@ -143,7 +145,8 @@ fun AddCardScreen() {
             ) {
                 Text(
                     text = "CANCEL",
-                    style = MaterialTheme.typography.titleMedium
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.clickable { navController.popBackStack() }
                 )
 
                 Text(
@@ -152,7 +155,8 @@ fun AddCardScreen() {
                 )
                 Text(
                     text = "SAVE",
-                    style = MaterialTheme.typography.titleMedium
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.clickable { navController.popBackStack() }
                 )
             }
         }

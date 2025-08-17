@@ -60,7 +60,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ContactsScreen() {
+fun ContactsScreen(navController: NavController) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
     var addContactSheet by remember { mutableStateOf(false) }
@@ -144,11 +144,15 @@ fun ContactsScreen() {
 
         AddContactSheet(showSheet = addContactSheet,
             sheetState = sheetState,
-            onDismissRequest = { addContactSheet = false })
+            onDismissRequest = { addContactSheet = false },
+            navController = navController
+        )
 
         ContactInfoSheet(showSheet = contactInoSheet,
             sheetState = sheetState,
-            onDismissRequest = { contactInoSheet = false })
+            onDismissRequest = { contactInoSheet = false },
+            navController = navController
+        )
     }
 }
 
@@ -157,7 +161,8 @@ fun ContactsScreen() {
 fun AddContactSheet(
     showSheet: Boolean,
     sheetState: SheetState,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
+    navController: NavController
 ) {
     val contactItems = listOf(
         Menu(Icons.Outlined.Add, "Create new", ""),
@@ -185,7 +190,7 @@ fun AddContactSheet(
                     Row (
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(30.dp),
-                        modifier = Modifier.padding(horizontal = 10.dp)
+                        modifier = Modifier.padding(horizontal = 10.dp).clickable { navController.navigate("add_contact") }
                     ) {
                         Icon(
                             imageVector = menu.icon,
@@ -223,7 +228,7 @@ fun noData() {
             modifier = Modifier.size(200.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
-        ButtonWithIcon(title = "SCAN", icon = Icons.Outlined.Settings, contentColor = LightBlueColor)
+        ButtonWithIcon(title = "SCAN", icon = Icons.Outlined.Settings, contentColor = LightBlueColor, onClick = { })
         Spacer(modifier = Modifier.height(15.dp))
 
         BoxWithConstraints {
@@ -251,7 +256,7 @@ fun noData() {
             }
         }
         Spacer(modifier = Modifier.height(15.dp))
-        ButtonWithIcon(title = "ADD CONTACT", icon = Icons.Outlined.Person)
+        ButtonWithIcon(title = "ADD CONTACT", icon = Icons.Outlined.Person, onClick = { })
         Spacer(modifier = Modifier.height(20.dp))
         Text(
             text = "Keep business and private contacts separate. Import business contacts into PulseID for a clear overview.",
@@ -265,7 +270,8 @@ fun noData() {
 fun ContactInfoSheet(
     showSheet: Boolean,
     sheetState: SheetState,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
+    navController: NavController
 ) {
     val contactItems = listOf(
         Menu(Icons.Outlined.Email, "test@gmail.com", ""),
@@ -326,7 +332,7 @@ fun ContactInfoSheet(
                     }
                 }
                 Spacer(modifier = Modifier.height(15.dp))
-                ButtonWithIcon(title = "Open Detailed Contact", icon = Icons.Outlined.Settings, contentColor = LightBlueColor, widthFraction = 1f)
+                ButtonWithIcon(title = "Open Detailed Contact", icon = Icons.Outlined.Settings, contentColor = LightBlueColor, widthFraction = 1f, onClick = { navController.navigate("contact_info") })
                 Spacer(modifier = Modifier.height(25.dp))
             }
         }

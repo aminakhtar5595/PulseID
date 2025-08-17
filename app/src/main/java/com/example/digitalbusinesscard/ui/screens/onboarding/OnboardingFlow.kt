@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.navigation.compose.rememberNavController
 import com.example.digitalbusinesscard.R
 import com.example.digitalbusinesscard.ui.components.PageIndicator
 import com.example.digitalbusinesscard.ui.theme.BackgroundColor
@@ -19,11 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun OnboardingFlow() {
-    val navController = rememberNavController()
+fun OnboardingFlow(navController: NavController) {
     val onboardingItems = listOf(
         Triple(R.drawable.onboarding_icon_one, "Digital Business Card", "Don't carry around business cards, use a digital one on your phone"),
         Triple(R.drawable.onboarding_icon_two, "Scan to add", "Just let someone scan your QR Code to add you as a contact"),

@@ -24,9 +24,10 @@ fun ButtonWithIcon(
     title: String,
     icon: ImageVector,
     widthFraction: Float = 0.7f,
+    onClick: () -> Unit
 ) {
     Button(
-        onClick = {  },
+        onClick = { onClick() },
         modifier = Modifier
             .fillMaxWidth(widthFraction)
             .border(1.dp, color = Color.LightGray, shape = RoundedCornerShape(8.dp)),
