@@ -13,21 +13,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Close
-import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.List
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -62,12 +57,9 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PremiumScreen() {
-    val scrollState = rememberScrollState()
     val premiumItems = listOf(
         Menu(Icons.Outlined.CheckCircle, "2 weeks free testing", "With first subscription"),
         Menu(Icons.Outlined.CheckCircle, "Add-free", ""),
-        Menu(Icons.Outlined.CheckCircle, "Unlimited business card scans", ""),
-        Menu(Icons.Outlined.CheckCircle, "Card Homescreen Widget", "")
     )
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
@@ -120,14 +112,14 @@ fun PremiumScreen() {
                     style = MaterialTheme.typography.bodyLarge.copy(color = Color.Gray, fontSize = 16.sp)
                 )
                 Spacer(modifier = Modifier.height(20.dp))
-//            Column (
-//                modifier = Modifier.padding(horizontal = 12.dp)
-//            ) {
-//                premiumItems.forEach { menu ->
-//                    IconTextRow(menu, iconColor = LightBlueColor, descriptionFontSize = 16.sp)
-//                    Spacer(modifier = Modifier.height(25.dp))
-//                }
-//            }
+            Column (
+                modifier = Modifier.padding(horizontal = 12.dp)
+            ) {
+                premiumItems.forEach { menu ->
+                    IconTextRow(menu, iconColor = LightBlueColor, descriptionFontSize = 16.sp)
+                    Spacer(modifier = Modifier.height(25.dp))
+                }
+            }
             }
         }
 
