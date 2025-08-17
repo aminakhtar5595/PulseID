@@ -16,9 +16,9 @@ import androidx.compose.ui.unit.sp
 fun TextLabel(title: String = "NEW") {
     Text(
         text = title,
-        style = MaterialTheme.typography.titleLarge.copy(color = Color.Magenta, fontSize = 16.sp, fontWeight = FontWeight.Medium),
+        style = MaterialTheme.typography.titleLarge.copy(color = Color.Magenta, fontSize = 14.sp, fontWeight = FontWeight.Medium),
         modifier = Modifier
             .background(color = Color.Magenta.copy(alpha = 0.2f), shape = RoundedCornerShape(15.dp))
-            .padding(horizontal = 12.dp)
+            .padding(horizontal = 10.dp)
     )
 }

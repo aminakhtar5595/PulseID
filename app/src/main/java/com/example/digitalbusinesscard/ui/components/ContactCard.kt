@@ -2,6 +2,7 @@ package com.example.digitalbusinesscard.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,33 +21,33 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun ContactCard(initial: String, image: Int, title: String, company: String) {
+fun ContactCard(initial: String, image: Int, title: String, company: String, onClick: () -> Unit) {
     Text(
         text = initial,
         style = MaterialTheme.typography.titleLarge.copy(color = Color.DarkGray), modifier = Modifier.padding(horizontal = 20.dp, vertical = 15.dp)
     )
     Row (
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.fillMaxWidth().background(color = Color.White).padding(5.dp)
+        modifier = Modifier.fillMaxWidth().background(color = Color.White).padding(5.dp).clickable { onClick() }
     ) {
         Row (
             horizontalArrangement = Arrangement.spacedBy(15.dp),
-            modifier = Modifier.padding(vertical = 15.dp, horizontal = 10.dp),
+            modifier = Modifier.padding(vertical = 5.dp, horizontal = 10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
                 painter = painterResource(id = image),
                 contentDescription = title,
-                modifier = Modifier.size(60.dp)
+                modifier = Modifier.size(55.dp)
             )
             Column {
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.titleLarge.copy(color = Color.Black, fontWeight = FontWeight.Light, fontSize = 20.sp)
+                    style = MaterialTheme.typography.titleLarge.copy(color = Color.Black, fontWeight = FontWeight.Light, fontSize = 19.sp)
                 )
                 Text(
                     text = company,
-                    style = MaterialTheme.typography.titleLarge.copy(color = Color.Gray, fontWeight = FontWeight.Light, fontSize = 20.sp)
+                    style = MaterialTheme.typography.titleLarge.copy(color = Color.Gray, fontWeight = FontWeight.Light, fontSize = 18.sp)
                 )
             }
         }

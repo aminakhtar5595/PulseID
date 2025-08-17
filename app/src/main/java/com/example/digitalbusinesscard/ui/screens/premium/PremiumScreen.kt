@@ -45,7 +45,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavController
 import com.example.digitalbusinesscard.ui.components.IconTextRow
 import com.example.digitalbusinesscard.ui.components.InputWithIcon
 import com.example.digitalbusinesscard.ui.components.Subscription
@@ -56,7 +56,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PremiumScreen() {
+fun PremiumScreen(navController: NavController) {
     val premiumItems = listOf(
         Menu(Icons.Outlined.CheckCircle, "2 weeks free testing", "With first subscription"),
         Menu(Icons.Outlined.CheckCircle, "Add-free", ""),
@@ -64,7 +64,6 @@ fun PremiumScreen() {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
     var contactFormSheet by remember { mutableStateOf(false) }
-    val navController = rememberNavController()
 
     Box (
         modifier = Modifier
@@ -185,7 +184,7 @@ fun ContactFormSheet(
                     Icon(
                         imageVector = Icons.Outlined.Close,
                         contentDescription = "Close form icon",
-                        modifier = Modifier.size(25.dp)
+                        modifier = Modifier.size(25.dp).clickable { onDismissRequest() }
                     )
                 }
                 Spacer(modifier = Modifier.height(10.dp))
