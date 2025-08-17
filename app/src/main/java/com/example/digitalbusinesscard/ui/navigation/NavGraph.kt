@@ -18,23 +18,23 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
-    NavHost(navController = navController, startDestination = Screen.Contacts.route, modifier = modifier) {
+    NavHost(navController = navController, startDestination = Screen.Splash.route, modifier = modifier) {
         composable(Screen.Splash.route) { SplashScreen() }
         composable(Screen.Menu.route) { MenuScreen() }
         composable(Screen.Premium.route) { PremiumScreen(navController) }
-        composable(Screen.Onboarding.route) { OnboardingFlow() }
-        composable(Screen.Contacts.route) { ContactsScreen() }
-        composable(Screen.AddContact.route) { AddContactScreen() }
-        composable(Screen.ContactInfo.route) { ContactInfoScreen() }
-        composable(Screen.Home.route) { CardScreen() }
-        composable(Screen.AddCard.route) { AddCardScreen() }
+        composable(Screen.Onboarding.route) { OnboardingFlow(navController) }
+        composable(Screen.Contacts.route) { ContactsScreen(navController) }
+        composable(Screen.AddContact.route) { AddContactScreen(navController) }
+        composable(Screen.ContactInfo.route) { ContactInfoScreen(navController) }
+        composable(Screen.Home.route) { CardScreen(navController) }
+        composable(Screen.AddCard.route) { AddCardScreen(navController) }
     }
-//    LaunchedEffect(Unit) {
-//        delay(2000)
-//        navController.navigate("onboarding") {
-//            popUpTo("splash") { inclusive = true }
-//        }
-//    }
+    LaunchedEffect(Unit) {
+        delay(2000)
+        navController.navigate("onboarding") {
+            popUpTo("splash") { inclusive = true }
+        }
+    }
 }
 
 

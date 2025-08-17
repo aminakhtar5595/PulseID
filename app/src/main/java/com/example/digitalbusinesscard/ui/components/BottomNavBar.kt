@@ -5,10 +5,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountBox
 import androidx.compose.material.icons.outlined.DateRange
-import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Menu
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -41,7 +39,7 @@ fun BottomNavBar(navController: NavController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    if (currentRoute != "onboarding" && currentRoute != "splash" && currentRoute != "premium") {
+    if (currentRoute != "onboarding" && currentRoute != "splash" && currentRoute != "premium" && currentRoute != "add_card" && currentRoute != "contact_info" && currentRoute != "add_contact") {
         Column {
             HorizontalDivider(thickness = 1.5.dp, color = BorderColor)
             NavigationBar(
@@ -56,6 +54,7 @@ fun BottomNavBar(navController: NavController) {
                                 imageVector = item.icon,
                                 contentDescription = item.label,
                                 modifier = Modifier.size(25.dp),
+                                tint = if (selected) LightBlueColor else Color.Gray
                             )
                         },
                         label = {

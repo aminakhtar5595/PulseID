@@ -37,6 +37,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.digitalbusinesscard.ui.components.ButtonWithIcon
 import com.example.digitalbusinesscard.ui.components.PageIndicator
 import com.example.digitalbusinesscard.ui.theme.BackgroundColor
@@ -46,8 +47,8 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 
 @Composable
-fun CardScreen() {
-    var isData by remember { mutableStateOf(true) }
+fun CardScreen(navController: NavController) {
+    var isData by remember { mutableStateOf(false) }
     Column (
         modifier = Modifier
             .fillMaxSize()
@@ -55,15 +56,15 @@ fun CardScreen() {
             .padding(vertical = 20.dp)
     ) {
         if (isData) {
-            CardView()
+            CardView(navController = navController)
         } else {
-            NoData()
+            NoData(navController = navController)
         }
     }
 }
 
 @Composable
-fun NoData() {
+fun NoData(navController: NavController) {
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -77,7 +78,7 @@ fun NoData() {
             modifier = Modifier.size(250.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
-        ButtonWithIcon(title = "CREATE BUSINESS CARD", icon = Icons.Outlined.Settings, contentColor = LightBlueColor, widthFraction = 0.9f)
+        ButtonWithIcon(title = "CREATE BUSINESS CARD", icon = Icons.Outlined.Settings, contentColor = LightBlueColor, widthFraction = 0.9f, onClick = { navController.navigate("add_card") })
         Spacer(modifier = Modifier.height(15.dp))
 
         BoxWithConstraints {
@@ -105,13 +106,13 @@ fun NoData() {
             }
         }
         Spacer(modifier = Modifier.height(15.dp))
-        ButtonWithIcon(title = "CONTACTS", icon = Icons.Outlined.Person, widthFraction = 0.9f)
+        ButtonWithIcon(title = "CONTACTS", icon = Icons.Outlined.Person, widthFraction = 0.9f, onClick = { navController.navigate("contacts") })
     }
 }
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun CardView() {
+fun CardView(navController: NavController) {
     val pagerState = rememberPagerState(initialPage = 0)
     val currentPage = pagerState.currentPage
     val totalPages = 2
@@ -139,7 +140,7 @@ fun CardView() {
         ) { page ->
             when (page) {
                 0 -> CardFirstView()
-                1 -> CardSecondView()
+                1 -> CardSecondView(navController = navController)
             }
         }
         Column (
@@ -206,7 +207,7 @@ fun CardFirstView() {
 }
 
 @Composable
-fun CardSecondView() {
+fun CardSecondView(navController: NavController) {
     Column (
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -216,7 +217,6 @@ fun CardSecondView() {
             modifier = Modifier.size(170.dp)
         )
         Spacer(modifier = Modifier.height(40.dp))
-        ButtonWithIcon(title = "ADD NEW CARD", icon = Icons.Outlined.Add, contentColor = LightBlueColor)
+        ButtonWithIcon(title = "ADD NEW CARD", icon = Icons.Outlined.Add, contentColor = LightBlueColor, onClick = { navController.navigate("add_card") })
     }
-
 }

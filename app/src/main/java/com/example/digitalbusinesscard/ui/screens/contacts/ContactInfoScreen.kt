@@ -2,6 +2,7 @@ package com.example.digitalbusinesscard.ui.screens.contacts
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.digitalbusinesscard.R
 import com.example.digitalbusinesscard.ui.components.ButtonWithIcon
 import com.example.digitalbusinesscard.ui.components.IconTextRow
@@ -40,7 +42,7 @@ import com.example.digitalbusinesscard.ui.theme.BorderColor
 import com.example.digitalbusinesscard.ui.theme.LightBlueColor
 
 @Composable
-fun ContactInfoScreen() {
+fun ContactInfoScreen(navController: NavController) {
     val contactItems = listOf(
         Menu(Icons.Outlined.List, "test@gmail.com", "Work"),
         Menu(Icons.Outlined.Person, "+92333 2480781", "Work"),
@@ -63,7 +65,7 @@ fun ContactInfoScreen() {
             Icon(
                 imageVector = Icons.Outlined.ArrowBack,
                 contentDescription = "Back Arrow",
-                modifier = Modifier.size(30.dp)
+                modifier = Modifier.size(30.dp).clickable { navController.popBackStack() }
             )
 
             Row(
@@ -151,6 +153,6 @@ fun ContactInfoScreen() {
             }
         }
         Spacer(modifier = Modifier.height(15.dp))
-        ButtonWithIcon(title = "Save to contacts", icon = Icons.Outlined.Settings, contentColor = LightBlueColor, widthFraction = 1f)
+        ButtonWithIcon(title = "Save to contacts", icon = Icons.Outlined.Settings, contentColor = LightBlueColor, widthFraction = 1f, onClick = { navController.popBackStack() })
     }
 }
