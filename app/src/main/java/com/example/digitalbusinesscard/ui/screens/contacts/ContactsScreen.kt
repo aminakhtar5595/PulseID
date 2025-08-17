@@ -18,7 +18,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Phone
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -44,6 +47,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.digitalbusinesscard.R
 import com.example.digitalbusinesscard.ui.components.ButtonWithIcon
 import com.example.digitalbusinesscard.ui.components.ContactCard
@@ -117,10 +121,22 @@ fun ContactsScreen() {
 
         if (isData) {
             Column (
-                modifier = Modifier.fillMaxSize().background(color = BackgroundColor)
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(color = BackgroundColor)
             ) {
-                ContactCard(initial = "A", image = R.drawable.app_logo, title = "Amin Akhtar", company = "Webook")
-                ContactCard(initial = "S", image = R.drawable.app_logo, title = "Saim Akhtar", company = "CVSparkle")
+                ContactCard(initial = "A", image = R.drawable.app_logo, title = "Amin Akhtar", company = "Webook",
+                    onClick = {
+                        contactInoSheet = true
+                        scope.launch { sheetState.show() }
+                    }
+                )
+                ContactCard(initial = "S", image = R.drawable.app_logo, title = "Saim Akhtar", company = "CVSparkle",
+                    onClick = {
+                        contactInoSheet = true
+                        scope.launch { sheetState.show() }
+                    }
+                )
             }
         } else {
             noData()
@@ -252,9 +268,9 @@ fun ContactInfoSheet(
     onDismissRequest: () -> Unit
 ) {
     val contactItems = listOf(
-        Menu(Icons.Outlined.Add, "test@gmail.com", ""),
-        Menu(Icons.Outlined.Person, "+92333 2480781", ""),
-        Menu(Icons.Outlined.Settings, "Webook", "")
+        Menu(Icons.Outlined.Email, "test@gmail.com", ""),
+        Menu(Icons.Outlined.Phone, "+92333 2480781", ""),
+        Menu(Icons.Outlined.Home, "Webook", "")
     )
     if (showSheet) {
         ModalBottomSheet(
@@ -299,7 +315,10 @@ fun ContactInfoSheet(
                 }
                 Spacer(modifier = Modifier.height(40.dp))
                 Column (
-                    modifier = Modifier.background(color = BorderColor, shape = RoundedCornerShape(3)).fillMaxWidth().padding(top = 25.dp, start = 20.dp, end = 20.dp, bottom = 10.dp),
+                    modifier = Modifier
+                        .background(color = BorderColor, shape = RoundedCornerShape(3))
+                        .fillMaxWidth()
+                        .padding(top = 25.dp, start = 20.dp, end = 20.dp, bottom = 10.dp),
                 ) {
                     contactItems.forEach { contact ->
                         IconTextRow(contact)
