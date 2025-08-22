@@ -168,6 +168,7 @@ fun ContactFormSheet(
     var message by remember { mutableStateOf("") }
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
+    val isFormValid = name.isNotBlank() && email.isNotBlank() && message.isNotBlank()
     if (showSheet) {
         ModalBottomSheet(
             onDismissRequest = onDismissRequest,
@@ -214,7 +215,7 @@ fun ContactFormSheet(
                     shape = RoundedCornerShape(5.dp),
                     contentPadding = PaddingValues(vertical = 15.dp),
                     colors = ButtonDefaults.buttonColors(contentColor = Color.White, containerColor = LightBlueColor),
-                    enabled = name.isNotBlank() && email.isNotBlank() && message.isNotBlank()
+                    enabled = isFormValid
                 ) {
                     Text("Send",
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.W400)
