@@ -1,5 +1,7 @@
 package com.example.digitalbusinesscard.ui.screens.premium
 
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -16,6 +18,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Check
@@ -44,8 +47,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -145,9 +151,7 @@ fun PremiumScreen(navController: NavController) {
                 )
             }
             Spacer(modifier = Modifier.height(10.dp))
-            Text("Then Rs 1,750 / Month. The plans are automatically renewed. Cancelable anytime. By clicking on \"Test now for free\" or \"Subscribe now\" you agree to our Subscription conditions",
-                style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Light, textAlign = TextAlign.Center)
-            )
+            SubscriptionAgreementText()
         }
 
         ContactFormSheet(showSheet = contactFormSheet,
@@ -192,7 +196,9 @@ fun ContactFormSheet(
                     Icon(
                         imageVector = Icons.Outlined.Close,
                         contentDescription = "Close form icon",
-                        modifier = Modifier.size(25.dp).clickable { onDismissRequest() }
+                        modifier = Modifier
+                            .size(25.dp)
+                            .clickable { onDismissRequest() }
                     )
                 }
                 Spacer(modifier = Modifier.height(10.dp))
@@ -230,4 +236,41 @@ fun submitContactForm(name: String, email: String, message: String) {
     Log.d("Submit contact form", "Name = $name")
     Log.d("Submit contact form", "Email = $email")
     Log.d("Submit contact form", "Message = $message")
+}
+
+@Composable
+fun SubscriptionAgreementText() {
+    val context = LocalContext.current
+    val annotatedText = buildAnnotatedString {
+        append("Then Rs 1,750 / Month. The plans are automatically renewed. Cancelable anytime. By clicking on \"Test now for free\" or \"Subscribe now\" you agree to our ")
+
+        pushStringAnnotation(
+            tag = "URL",
+            annotation = "https://www.cardz.pro"
+        )
+        withStyle(
+            style = SpanStyle(
+                color = LightBlueColor,
+                fontWeight = FontWeight.Light
+            )
+        ) {
+            append("Subscription conditions")
+        }
+        pop()
+    }
+
+    ClickableText(
+        text = annotatedText,
+        style = MaterialTheme.typography.bodySmall.copy(
+            textAlign = TextAlign.Center
+        ),
+        modifier = Modifier.fillMaxWidth(),
+        onClick = { offset ->
+            annotatedText.getStringAnnotations("URL", offset, offset)
+                .firstOrNull()?.let { annotation ->
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(annotation.item))
+                    context.startActivity(intent)
+                }
+        }
+    )
 }
