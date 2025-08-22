@@ -24,9 +24,7 @@ class MainActivity : ComponentActivity() {
             systemUiController.setSystemBarsColor(
                 color = BackgroundColor
             )
-            DigitalBusinessCardTheme {
-                MainScreen()
-            }
+            MainScreen()
         }
     }
 }
