@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.digitalbusinesscard.ui.MainScreen
 import com.example.digitalbusinesscard.ui.navigation.AppNavGraph
 import com.example.digitalbusinesscard.ui.theme.BackgroundColor
+import com.example.digitalbusinesscard.ui.theme.DigitalBusinessCardTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +24,9 @@ class MainActivity : ComponentActivity() {
             systemUiController.setSystemBarsColor(
                 color = BackgroundColor
             )
-            MainScreen()
+            DigitalBusinessCardTheme {
+                MainScreen()
+            }
         }
     }
 }
