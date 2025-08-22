@@ -17,7 +17,8 @@ import androidx.compose.ui.unit.dp
 fun InputWithIcon(
     icon: ImageVector,
     input: String,
-    placeholder: String
+    placeholder: String,
+    onInputChange: (String) -> Unit,
 ) {
     Row (
         verticalAlignment = Alignment.CenterVertically,
@@ -30,7 +31,7 @@ fun InputWithIcon(
         )
         OutlinedTextField(
             value = input,
-            onValueChange = {  },
+            onValueChange = onInputChange,
             label = { Text(placeholder) },
             modifier = Modifier.fillMaxWidth(),
         )
