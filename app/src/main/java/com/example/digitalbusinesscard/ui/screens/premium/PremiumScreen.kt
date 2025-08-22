@@ -3,6 +3,7 @@ package com.example.digitalbusinesscard.ui.screens.premium
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
+import android.util.Patterns
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -61,6 +62,7 @@ import com.example.digitalbusinesscard.ui.components.Subscription
 import com.example.digitalbusinesscard.ui.model.Menu
 import com.example.digitalbusinesscard.ui.theme.BackgroundColor
 import com.example.digitalbusinesscard.ui.theme.LightBlueColor
+import com.example.digitalbusinesscard.utils.Constants
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -172,7 +174,8 @@ fun ContactFormSheet(
     var message by remember { mutableStateOf("") }
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    val isFormValid = name.isNotBlank() && email.isNotBlank() && message.isNotBlank()
+    val emailPattern = Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    val isFormValid = name.isNotBlank() && emailPattern && message.isNotBlank()
     if (showSheet) {
         ModalBottomSheet(
             onDismissRequest = onDismissRequest,
@@ -213,7 +216,7 @@ fun ContactFormSheet(
                     onClick = {
                         scope.launch {
                             submitContactForm(name, email, message)
-                            Toast.makeText(context, "Thanks for reporting your problem!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, Constants.CONTACT_FORM_THANK_YOU, Toast.LENGTH_SHORT).show()
                             sheetState.hide()
                             onDismissRequest()
                         }
@@ -246,12 +249,11 @@ fun SubscriptionAgreementText() {
 
         pushStringAnnotation(
             tag = "URL",
-            annotation = "https://www.cardz.pro"
+            annotation = Constants.SUBSCRIPTION_CONDITIONS_URL
         )
         withStyle(
             style = SpanStyle(
-                color = LightBlueColor,
-                fontWeight = FontWeight.Light
+                color = LightBlueColor
             )
         ) {
             append("Subscription conditions")
@@ -262,7 +264,7 @@ fun SubscriptionAgreementText() {
     ClickableText(
         text = annotatedText,
         style = MaterialTheme.typography.bodySmall.copy(
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center, color = Color.Gray
         ),
         modifier = Modifier.fillMaxWidth(),
         onClick = { offset ->
