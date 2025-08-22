@@ -102,28 +102,31 @@ fun AddContactScreen(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                InputWithIcon(icon = Icons.Outlined.Person, input = firstName, placeholder = "First Name")
+                InputWithIcon(icon = Icons.Outlined.Person, input = firstName, placeholder = "Card Type", onInputChange = { firstName = it })
                 Spacer(modifier = Modifier.height(20.dp))
 
-                InputWithIcon(icon = Icons.Outlined.Person, input = lastName, placeholder = "Last Name")
+                InputWithIcon(icon = Icons.Outlined.Person, input = firstName, placeholder = "First Name", onInputChange = { firstName = it })
                 Spacer(modifier = Modifier.height(20.dp))
 
-                InputWithIcon(icon = Icons.Outlined.Email, input = email, placeholder = "Email")
+                InputWithIcon(icon = Icons.Outlined.Person, input = lastName, placeholder = "Last Name", onInputChange = { lastName = it })
                 Spacer(modifier = Modifier.height(20.dp))
 
-                InputWithIcon(icon = Icons.Outlined.Phone, input = phone, placeholder = "Phone Number")
+                InputWithIcon(icon = Icons.Outlined.Email, input = email, placeholder = "Email", onInputChange = { email = it })
                 Spacer(modifier = Modifier.height(20.dp))
 
-                InputWithIcon(icon = Icons.Outlined.Info, input = job, placeholder = "Job")
+                InputWithIcon(icon = Icons.Outlined.Phone, input = phone, placeholder = "Phone Number", onInputChange = { phone = it })
                 Spacer(modifier = Modifier.height(20.dp))
 
-                InputWithIcon(icon = Icons.Outlined.Settings, input = department, placeholder = "Department")
+                InputWithIcon(icon = Icons.Outlined.Info, input = job, placeholder = "Job", onInputChange = { job = it })
                 Spacer(modifier = Modifier.height(20.dp))
 
-                InputWithIcon(icon = Icons.Outlined.Home, input = company, placeholder = "Company")
+                InputWithIcon(icon = Icons.Outlined.Settings, input = department, placeholder = "Department", onInputChange = { department = it })
                 Spacer(modifier = Modifier.height(20.dp))
 
-                InputWithIcon(icon = Icons.Outlined.DateRange, input = website, placeholder = "Website")
+                InputWithIcon(icon = Icons.Outlined.Home, input = company, placeholder = "Company", onInputChange = { company = it })
+                Spacer(modifier = Modifier.height(20.dp))
+
+                InputWithIcon(icon = Icons.Outlined.DateRange, input = website, placeholder = "Website", onInputChange = { website = it })
                 Spacer(modifier = Modifier.height(80.dp))
             }
         }
