@@ -18,7 +18,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
-    NavHost(navController = navController, startDestination = Screen.AddContact.route, modifier = modifier) {
+    NavHost(navController = navController, startDestination = Screen.Contacts.route, modifier = modifier) {
         composable(Screen.Splash.route) { SplashScreen() }
         composable(Screen.Menu.route) { MenuScreen() }
         composable(Screen.Premium.route) { PremiumScreen(navController) }
