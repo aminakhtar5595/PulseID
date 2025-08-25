@@ -45,10 +45,12 @@ fun ContactCard(initial: String, image: Int, title: String, company: String, onC
                     text = title,
                     style = MaterialTheme.typography.titleLarge.copy(color = Color.Black, fontWeight = FontWeight.Light, fontSize = 19.sp)
                 )
-                Text(
-                    text = company,
-                    style = MaterialTheme.typography.titleLarge.copy(color = Color.Gray, fontWeight = FontWeight.Light, fontSize = 18.sp)
-                )
+                if (company.isNotBlank()) {
+                    Text(
+                        text = company,
+                        style = MaterialTheme.typography.titleLarge.copy(color = Color.Gray, fontWeight = FontWeight.Light, fontSize = 18.sp)
+                    )
+                }
             }
         }
         TextLabel()
