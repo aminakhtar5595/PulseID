@@ -70,4 +70,6 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.3.1")
     implementation("com.google.accompanist:accompanist-pager:0.28.0")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.28.0")
+    implementation("androidx.datastore:datastore-preferences:1.1.7")
+    implementation("com.google.code.gson:gson:2.11.0")
 }

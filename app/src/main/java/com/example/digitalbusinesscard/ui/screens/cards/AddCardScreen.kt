@@ -32,21 +32,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.digitalbusinesscard.R
+import com.example.digitalbusinesscard.data.datastore.CardDataStore
+import com.example.digitalbusinesscard.data.model.Card
 import com.example.digitalbusinesscard.ui.components.InputWithIcon
 import com.example.digitalbusinesscard.ui.theme.BackgroundColor
 import com.example.digitalbusinesscard.ui.theme.BorderColor
+import kotlinx.coroutines.launch
 
 @Composable
 fun AddCardScreen(navController: NavController) {
+    var cardType by remember { mutableStateOf("") }
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -55,8 +61,12 @@ fun AddCardScreen(navController: NavController) {
     var department by remember { mutableStateOf("") }
     var company by remember { mutableStateOf("") }
     var website by remember { mutableStateOf("") }
-
     val scrollState = rememberScrollState()
+
+    val context = LocalContext.current
+    val cardDataStore = remember { CardDataStore(context) }
+    val scope = rememberCoroutineScope()
+
 
     Box(
         modifier = Modifier
@@ -102,7 +112,7 @@ fun AddCardScreen(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                InputWithIcon(icon = Icons.Outlined.Person, input = firstName, placeholder = "Card Type", onInputChange = { firstName = it })
+                InputWithIcon(icon = Icons.Outlined.Person, input = cardType, placeholder = "Card Type", onInputChange = { cardType = it })
                 Spacer(modifier = Modifier.height(20.dp))
 
                 InputWithIcon(icon = Icons.Outlined.Person, input = firstName, placeholder = "First Name", onInputChange = { firstName = it })
@@ -156,7 +166,23 @@ fun AddCardScreen(navController: NavController) {
                 Text(
                     text = "SAVE",
                     style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.clickable { navController.popBackStack() }
+                    modifier = Modifier.clickable {
+                        scope.launch {
+                            val newCard = Card(
+                                cardType = cardType,
+                                firstName = firstName,
+                                lastName = lastName,
+                                email = email,
+                                phone = phone,
+                                job = job,
+                                department = department,
+                                company = company,
+                                website = website
+                            )
+                            cardDataStore.saveCard(newCard)
+                            navController.popBackStack()
+                        }
+                    }
                 )
             }
         }

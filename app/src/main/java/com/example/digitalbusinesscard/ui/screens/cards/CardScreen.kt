@@ -1,4 +1,5 @@
 package com.example.digitalbusinesscard.ui.screens.cards
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -25,19 +26,24 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import com.example.digitalbusinesscard.R
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.digitalbusinesscard.data.datastore.CardDataStore
+import com.example.digitalbusinesscard.data.model.Card
 import com.example.digitalbusinesscard.ui.components.ButtonWithIcon
 import com.example.digitalbusinesscard.ui.components.PageIndicator
 import com.example.digitalbusinesscard.ui.theme.BackgroundColor
@@ -48,15 +54,19 @@ import com.google.accompanist.pager.rememberPagerState
 
 @Composable
 fun CardScreen(navController: NavController) {
-    var isData by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val cardDataStore = remember { CardDataStore(context) }
+    val cards by cardDataStore.getCards().collectAsState(initial = emptyList())
+    Log.i("HomeScreen", "Get cards: ${cards.size}")
+
     Column (
         modifier = Modifier
             .fillMaxSize()
             .background(color = BackgroundColor)
             .padding(vertical = 20.dp)
     ) {
-        if (isData) {
-            CardView(navController = navController)
+        if (cards.isNotEmpty()) {
+            CardView(navController = navController, cards = cards)
         } else {
             NoData(navController = navController)
         }
@@ -112,10 +122,10 @@ fun NoData(navController: NavController) {
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun CardView(navController: NavController) {
+fun CardView(navController: NavController, cards: List<Card>) {
     val pagerState = rememberPagerState(initialPage = 0)
     val currentPage = pagerState.currentPage
-    val totalPages = 2
+    val totalPages = cards.size + 1
 
     Column(
         modifier = Modifier.padding(horizontal = 20.dp)
@@ -138,9 +148,10 @@ fun CardView(navController: NavController) {
                 .fillMaxWidth()
                 .weight(1f),
         ) { page ->
-            when (page) {
-                0 -> CardFirstView()
-                1 -> CardSecondView(navController = navController)
+            if (page < cards.size) {
+                BusinessCardView(card = cards[page])
+            } else {
+                CardSecondView(navController = navController)
             }
         }
         Column (
@@ -155,7 +166,7 @@ fun CardView(navController: NavController) {
 }
 
 @Composable
-fun CardFirstView() {
+fun BusinessCardView(card: Card) {
     Box(
         modifier = Modifier
             .padding(horizontal = 25.dp)
@@ -164,22 +175,25 @@ fun CardFirstView() {
         Column(
             modifier = Modifier.padding(20.dp)
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.add_image),
-                contentDescription = "User profile picture",
-                modifier = Modifier.size(120.dp)
-            )
-
-            Spacer(modifier = Modifier.height(15.dp))
+//            Image(
+//                painter = painterResource(id = R.drawable.add_image),
+//                contentDescription = "User profile picture",
+//                modifier = Modifier.size(120.dp)
+//            )
+//
+//            Spacer(modifier = Modifier.height(15.dp))
 
             Text(
-                text = "Amin",
+                text = card.firstName,
                 style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold)
             )
-            Text(
-                text = "Akhtar",
-                style = MaterialTheme.typography.headlineMedium
-            )
+            if (card.lastName.isNotBlank()) {
+                Text(
+                    text = card.lastName,
+                    style = MaterialTheme.typography.headlineMedium
+                )
+            }
+
 
             Spacer(modifier = Modifier.height(15.dp))
 
