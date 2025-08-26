@@ -53,6 +53,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.digitalbusinesscard.R
 import com.example.digitalbusinesscard.data.datastore.ContactDataStore
+import com.example.digitalbusinesscard.data.model.Contact
 import com.example.digitalbusinesscard.ui.components.ButtonWithIcon
 import com.example.digitalbusinesscard.ui.components.ContactCard
 import com.example.digitalbusinesscard.ui.components.IconTextRow
@@ -70,11 +71,12 @@ fun ContactsScreen(navController: NavController) {
     var addContactSheet by remember { mutableStateOf(false) }
     var contactInoSheet by remember { mutableStateOf(false) }
     var isData by remember { mutableStateOf(true) }
+    var selectedContact by remember { mutableStateOf<Contact?>(null) }
 
     val context = LocalContext.current
     val contactDataStore = remember { ContactDataStore(context) }
     val contacts by contactDataStore.getContacts().collectAsState(initial = emptyList())
-    Log.i("ContactScreen", "Get contacts: ${contacts}")
+    Log.i("ContactScreen", "Get contacts: $contacts")
 
     Column (
         modifier = Modifier
@@ -136,8 +138,9 @@ fun ContactsScreen(navController: NavController) {
                     .background(color = BackgroundColor)
             ) {
                 contacts.forEach { item ->
-                    ContactCard(initial = "S", image = R.drawable.app_logo, title = item.firstName, company = item.company,
+                    ContactCard(initial = item.firstName.firstOrNull()?.toString() ?: "S", image = R.drawable.app_logo, title = item.firstName, company = item.company,
                         onClick = {
+                            selectedContact = item
                             contactInoSheet = true
                             scope.launch { sheetState.show() }
                         }
@@ -157,7 +160,8 @@ fun ContactsScreen(navController: NavController) {
         ContactInfoSheet(showSheet = contactInoSheet,
             sheetState = sheetState,
             onDismissRequest = { contactInoSheet = false },
-            navController = navController
+            navController = navController,
+            contact = selectedContact
         )
     }
 }
@@ -277,14 +281,15 @@ fun ContactInfoSheet(
     showSheet: Boolean,
     sheetState: SheetState,
     onDismissRequest: () -> Unit,
-    navController: NavController
+    navController: NavController,
+    contact: Contact?
 ) {
-    val contactItems = listOf(
-        Menu(Icons.Outlined.Email, "test@gmail.com", ""),
-        Menu(Icons.Outlined.Phone, "+92333 2480781", ""),
-        Menu(Icons.Outlined.Home, "Webook", "")
-    )
-    if (showSheet) {
+    if (showSheet && contact != null) {
+        val contactItems = listOf(
+            Menu(Icons.Outlined.Email, if (!contact.email.isNullOrBlank()) contact.email else "No email", ""),
+            Menu(Icons.Outlined.Phone, if (!contact.phone.isNullOrBlank()) contact.phone else "No phone", ""),
+            Menu(Icons.Outlined.Home, if (!contact.company.isNullOrBlank()) contact.company else "No company", "")
+        )
         ModalBottomSheet(
             onDismissRequest = onDismissRequest,
             sheetState = sheetState,
@@ -304,7 +309,7 @@ fun ContactInfoSheet(
 //                        .align(Alignment.CenterHorizontally)
 //                )
                 Text(
-                    text = "Amin Akhtar",
+                    text = "${contact.firstName} ${contact.lastName}",
                     style = MaterialTheme.typography.headlineMedium
                 )
                 Spacer(modifier = Modifier.height(20.dp))
