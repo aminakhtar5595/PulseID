@@ -39,7 +39,16 @@ fun BottomNavBar(navController: NavController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    if (currentRoute != "onboarding" && currentRoute != "splash" && currentRoute != "premium" && currentRoute != "add_card" && currentRoute != "contact_info" && currentRoute != "add_contact") {
+    val excludedRoutes = listOf(
+        "onboarding",
+        "splash",
+        "premium",
+        "add_card",
+        "contact_info",
+        "add_contact"
+    )
+
+    if (excludedRoutes.none { currentRoute?.startsWith(it) == true }) {
         Column {
             HorizontalDivider(thickness = 1.5.dp, color = BorderColor)
             NavigationBar(

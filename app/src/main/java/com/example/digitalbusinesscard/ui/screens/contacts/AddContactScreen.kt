@@ -1,5 +1,6 @@
 package com.example.digitalbusinesscard.ui.screens.contacts
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -29,10 +30,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,21 +55,37 @@ import com.example.digitalbusinesscard.ui.theme.BorderColor
 import kotlinx.coroutines.launch
 
 @Composable
-fun AddContactScreen(navController: NavController) {
-    var cardType by remember { mutableStateOf("") }
-    var firstName by remember { mutableStateOf("") }
-    var lastName by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var phone by remember { mutableStateOf("") }
-    var job by remember { mutableStateOf("") }
-    var department by remember { mutableStateOf("") }
-    var company by remember { mutableStateOf("") }
-    var website by remember { mutableStateOf("") }
-
+fun AddContactScreen(navController: NavController, contactId: String) {
     val scrollState = rememberScrollState()
     val context = LocalContext.current
     val contactDataStore = remember { ContactDataStore(context) }
     val scope = rememberCoroutineScope()
+    val contacts by contactDataStore.getContacts().collectAsState(initial = emptyList())
+    val contact = contacts.find { it.id == contactId }
+    var cardType by rememberSaveable { mutableStateOf("") }
+    var firstName by rememberSaveable { mutableStateOf("") }
+    var lastName by rememberSaveable { mutableStateOf("") }
+    var email by rememberSaveable { mutableStateOf("") }
+    var phone by rememberSaveable { mutableStateOf("") }
+    var job by rememberSaveable { mutableStateOf("") }
+    var department by rememberSaveable { mutableStateOf("") }
+    var company by rememberSaveable { mutableStateOf("") }
+    var website by rememberSaveable { mutableStateOf("") }
+
+    LaunchedEffect(contact) {
+        contact?.let {
+            cardType = it.cardType ?: ""
+            firstName = it.firstName ?: ""
+            lastName = it.lastName ?: ""
+            email = it.email ?: ""
+            phone = it.phone ?: ""
+            job = it.job ?: ""
+            department = it.department ?: ""
+            company = it.company ?: ""
+            website = it.website ?: ""
+        }
+    }
+    Log.i("AddContactScreen", "Get contacts: $contact")
 
     Box(
         modifier = Modifier
@@ -77,12 +97,16 @@ fun AddContactScreen(navController: NavController) {
             modifier = Modifier.fillMaxSize()
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp)
             ) {
                 Icon(
                     imageVector = Icons.Outlined.ArrowBack,
                     contentDescription = "Back arrow icon",
-                    modifier = Modifier.size(30.dp).clickable { navController.popBackStack() }
+                    modifier = Modifier
+                        .size(30.dp)
+                        .clickable { navController.popBackStack() }
                 )
                 Text(
                     text = "Edit Contact",
@@ -99,7 +123,10 @@ fun AddContactScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(30.dp))
 
             Column(
-                modifier = Modifier.fillMaxSize().verticalScroll(scrollState).padding(horizontal = 20.dp),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(scrollState)
+                    .padding(horizontal = 20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
 
             ) {
@@ -178,7 +205,10 @@ fun AddContactScreen(navController: NavController) {
                                 company = company,
                                 website = website
                             )
-                            contactDataStore.saveContact(newContact)
+//                            contactDataStore.saveContact(newContact)
+                            if (contact != null) {
+                                contactDataStore.deleteContact(contact.id)
+                            }
                             navController.popBackStack()
                         }
                     }
