@@ -70,7 +70,6 @@ fun ContactsScreen(navController: NavController) {
     val scope = rememberCoroutineScope()
     var addContactSheet by remember { mutableStateOf(false) }
     var contactInoSheet by remember { mutableStateOf(false) }
-    var isData by remember { mutableStateOf(true) }
     var selectedContact by remember { mutableStateOf<Contact?>(null) }
 
     val context = LocalContext.current
@@ -343,7 +342,7 @@ fun ContactInfoSheet(
                     }
                 }
                 Spacer(modifier = Modifier.height(15.dp))
-                ButtonWithIcon(title = "Open Detailed Contact", icon = Icons.Outlined.Settings, contentColor = LightBlueColor, widthFraction = 1f, onClick = { navController.navigate("contact_info") })
+                ButtonWithIcon(title = "Open Detailed Contact", icon = Icons.Outlined.Settings, contentColor = LightBlueColor, widthFraction = 1f, onClick = { navController.navigate("contact_info/${contact.id}") })
                 Spacer(modifier = Modifier.height(25.dp))
             }
         }
