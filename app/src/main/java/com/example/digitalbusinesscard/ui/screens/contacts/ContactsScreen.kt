@@ -199,7 +199,7 @@ fun AddContactSheet(
                     Row (
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(30.dp),
-                        modifier = Modifier.padding(horizontal = 10.dp).clickable { navController.navigate("add_contact") }
+                        modifier = Modifier.padding(horizontal = 10.dp).clickable { navController.navigate("add_contact/") }
                     ) {
                         Icon(
                             imageVector = menu.icon,
@@ -318,11 +318,12 @@ fun ContactInfoSheet(
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.whatsapp_icon),
-                        contentDescription = "WhatsApp Icon"
+                        contentDescription = "WhatsApp Icon",
+                        modifier = Modifier.clickable { navController.navigate("add_contact/${contact.id}") }
                     )
                     Image(
                         painter = painterResource(id = R.drawable.message_icon),
-                        contentDescription = "Message Icon"
+                        contentDescription = "Message Icon",
                     )
                     Image(
                         painter = painterResource(id = R.drawable.email_icon),

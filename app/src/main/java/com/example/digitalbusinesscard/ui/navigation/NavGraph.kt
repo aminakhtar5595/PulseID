@@ -24,7 +24,11 @@ fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier)
         composable(Screen.Premium.route) { PremiumScreen(navController) }
         composable(Screen.Onboarding.route) { OnboardingFlow(navController) }
         composable(Screen.Contacts.route) { ContactsScreen(navController) }
-        composable(Screen.AddContact.route) { AddContactScreen(navController) }
+        composable("${Screen.AddContact.route}/{contactId}"
+        ) { backStackEntry ->
+            val contactId = backStackEntry.arguments?.getString("contactId")
+            AddContactScreen(navController = navController, contactId = contactId ?: "")
+        }
         composable(route = "${Screen.ContactInfo.route}/{contactId}"
         ) { backStackEntry ->
             val contactId = backStackEntry.arguments?.getString("contactId")
