@@ -1,7 +1,8 @@
 package com.example.digitalbusinesscard.ui.screens.cards
-import android.util.Log
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -18,17 +19,26 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -43,18 +53,19 @@ import com.example.digitalbusinesscard.data.datastore.CardDataStore
 import com.example.digitalbusinesscard.data.model.Card
 import com.example.digitalbusinesscard.ui.components.ButtonWithIcon
 import com.example.digitalbusinesscard.ui.components.PageIndicator
+import com.example.digitalbusinesscard.ui.model.Menu
 import com.example.digitalbusinesscard.ui.theme.BackgroundColor
 import com.example.digitalbusinesscard.ui.theme.LightBlueColor
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import kotlinx.coroutines.launch
 
 @Composable
 fun CardScreen(navController: NavController) {
     val context = LocalContext.current
     val cardDataStore = remember { CardDataStore(context) }
     val cards by cardDataStore.getCards().collectAsState(initial = emptyList())
-    Log.i("HomeScreen", "Get cards: ${cards.size}")
 
     Column (
         modifier = Modifier
@@ -85,7 +96,7 @@ fun NoData(navController: NavController) {
             modifier = Modifier.size(250.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
-        ButtonWithIcon(title = "CREATE BUSINESS CARD", icon = Icons.Outlined.Settings, contentColor = LightBlueColor, widthFraction = 0.9f, onClick = { navController.navigate("add_card") })
+        ButtonWithIcon(title = "CREATE BUSINESS CARD", icon = Icons.Outlined.Settings, contentColor = LightBlueColor, widthFraction = 0.9f, onClick = { navController.navigate("add_card/") })
         Spacer(modifier = Modifier.height(15.dp))
 
         BoxWithConstraints {
@@ -117,12 +128,17 @@ fun NoData(navController: NavController) {
     }
 }
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun CardView(navController: NavController, cards: List<Card>) {
     val pagerState = rememberPagerState(initialPage = 0)
     val currentPage = pagerState.currentPage
     val totalPages = cards.size + 1
+    var addCardSheet by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    var selectedCard by remember { mutableStateOf<Card?>(null) }
+    val isLastPage = currentPage == cards.size
 
     Column(
         modifier = Modifier.padding(horizontal = 20.dp)
@@ -134,8 +150,18 @@ fun CardView(navController: NavController, cards: List<Card>) {
             Icon(
                 imageVector = Icons.Outlined.MoreVert,
                 contentDescription = "More options",
-                modifier = Modifier.size(30.dp)
+                modifier = Modifier
+                    .size(30.dp)
+                    .then(
+                        if (!isLastPage) Modifier.clickable {
+                            selectedCard = cards[currentPage]
+                            addCardSheet = true
+                            scope.launch { sheetState.show() }
+                        } else Modifier
+                    ),
+                tint = if (isLastPage) Color.Gray else Color.Unspecified
             )
+
         }
         Spacer(modifier = Modifier.height(10.dp))
         HorizontalPager(
@@ -159,6 +185,13 @@ fun CardView(navController: NavController, cards: List<Card>) {
         ) {
             PageIndicator(currentPage = currentPage, totalPages = totalPages)
         }
+        AddCardSheet(
+            showSheet = addCardSheet,
+            sheetState = sheetState,
+            onDismissRequest = { addCardSheet = false },
+            navController = navController,
+            card = selectedCard
+        )
     }
 }
 
@@ -228,6 +261,75 @@ fun CardSecondView(navController: NavController) {
             modifier = Modifier.size(170.dp)
         )
         Spacer(modifier = Modifier.height(40.dp))
-        ButtonWithIcon(title = "ADD NEW CARD", icon = Icons.Outlined.Add, contentColor = LightBlueColor, onClick = { navController.navigate("add_card") })
+        ButtonWithIcon(title = "ADD NEW CARD", icon = Icons.Outlined.Add, contentColor = LightBlueColor, onClick = { navController.navigate("add_card/") })
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AddCardSheet(
+    showSheet: Boolean,
+    sheetState: SheetState,
+    onDismissRequest: () -> Unit,
+    navController: NavController,
+    card: Card?
+) {
+    val context = LocalContext.current
+    val cardDataStore = remember { CardDataStore(context) }
+    val scope = rememberCoroutineScope()
+    val contactItems = listOf(
+        Menu(Icons.Outlined.Edit, "Edit", ""),
+        Menu(Icons.Outlined.Delete, "Delete", "")
+    )
+    if (showSheet) {
+        ModalBottomSheet(
+            onDismissRequest = onDismissRequest,
+            sheetState = sheetState,
+            scrimColor = Color.Black.copy(alpha = 0.5f),
+            shape = RoundedCornerShape(10.dp),
+        ) {
+            Column (
+                modifier = Modifier.padding(horizontal = 25.dp)
+            ) {
+                Row {
+                    Text(
+                        text = "Update Card",
+                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.SemiBold)
+                    )
+                }
+                Spacer(modifier = Modifier.height(30.dp))
+                contactItems.forEach { menu ->
+                    Row (
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(30.dp),
+                        modifier = Modifier.padding(horizontal = 10.dp)
+                            .clickable {
+                                if (card != null) {
+                                    when (menu.title) {
+                                        "Edit" -> navController.navigate("add_card/${card.id}")
+                                        "Delete" -> scope.launch { cardDataStore.deleteCard(card.id) }
+                                    }
+                                }
+                                onDismissRequest()
+                            }
+                    ) {
+                        Icon(
+                            imageVector = menu.icon,
+                            contentDescription = menu.title,
+                            modifier = Modifier.size(30.dp),
+                            tint = Color.Gray
+                        )
+
+                        Column {
+                            Text(
+                                text = menu.title,
+                                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Light, fontSize = 20.sp)
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(30.dp))
+                }
+            }
+        }
     }
 }

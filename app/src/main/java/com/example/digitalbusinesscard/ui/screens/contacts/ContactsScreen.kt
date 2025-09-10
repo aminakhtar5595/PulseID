@@ -1,6 +1,5 @@
 package com.example.digitalbusinesscard.ui.screens.contacts
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -75,7 +74,6 @@ fun ContactsScreen(navController: NavController) {
     val context = LocalContext.current
     val contactDataStore = remember { ContactDataStore(context) }
     val contacts by contactDataStore.getContacts().collectAsState(initial = emptyList())
-    Log.i("ContactScreen", "Get contacts: $contacts")
 
     Column (
         modifier = Modifier
@@ -147,7 +145,7 @@ fun ContactsScreen(navController: NavController) {
                 }
             }
         } else {
-            noData()
+            noData(navController = navController)
         }
 
         AddContactSheet(showSheet = addContactSheet,
@@ -223,7 +221,7 @@ fun AddContactSheet(
 }
 
 @Composable
-fun noData() {
+fun noData(navController: NavController) {
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -265,7 +263,7 @@ fun noData() {
             }
         }
         Spacer(modifier = Modifier.height(15.dp))
-        ButtonWithIcon(title = "ADD CONTACT", icon = Icons.Outlined.Person, onClick = { })
+        ButtonWithIcon(title = "ADD CONTACT", icon = Icons.Outlined.Person, onClick = { navController.navigate("add_contact/") })
         Spacer(modifier = Modifier.height(20.dp))
         Text(
             text = "Keep business and private contacts separate. Import business contacts into PulseID for a clear overview.",
@@ -318,12 +316,11 @@ fun ContactInfoSheet(
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.whatsapp_icon),
-                        contentDescription = "WhatsApp Icon",
-                        modifier = Modifier.clickable { navController.navigate("add_contact/${contact.id}") }
+                        contentDescription = "WhatsApp Icon"
                     )
                     Image(
                         painter = painterResource(id = R.drawable.message_icon),
-                        contentDescription = "Message Icon",
+                        contentDescription = "Message Icon"
                     )
                     Image(
                         painter = painterResource(id = R.drawable.email_icon),

@@ -1,6 +1,5 @@
 package com.example.digitalbusinesscard.ui.screens.contacts
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,12 +17,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.List
-import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -31,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -46,6 +45,7 @@ import com.example.digitalbusinesscard.ui.model.Menu
 import com.example.digitalbusinesscard.ui.theme.BackgroundColor
 import com.example.digitalbusinesscard.ui.theme.BorderColor
 import com.example.digitalbusinesscard.ui.theme.LightBlueColor
+import kotlinx.coroutines.launch
 
 @Composable
 fun ContactInfoScreen(navController: NavController, contactId: String) {
@@ -55,7 +55,7 @@ fun ContactInfoScreen(navController: NavController, contactId: String) {
     val contactDataStore = remember { ContactDataStore(context) }
     val contacts by contactDataStore.getContacts().collectAsState(initial = emptyList())
     val contact = contacts.find { it.id == contactId }
-    Log.i("ContactInfoScreen", "Get contacts info: $contact")
+    val scope = rememberCoroutineScope()
 
     if (contact != null) {
         val contactItems = listOf(
@@ -89,17 +89,17 @@ fun ContactInfoScreen(navController: NavController, contactId: String) {
                     Icon(
                         imageVector = Icons.Outlined.Edit,
                         contentDescription = "Edit Contact",
-                        modifier = Modifier.size(30.dp)
+                        modifier = Modifier.size(30.dp).clickable { navController.navigate("add_contact/${contact.id}") }
                     )
                     Icon(
-                        imageVector = Icons.Outlined.Star,
-                        contentDescription = "Favorite Contact",
-                        modifier = Modifier.size(30.dp)
-                    )
-                    Icon(
-                        imageVector = Icons.Outlined.MoreVert,
-                        contentDescription = "More Options",
-                        modifier = Modifier.size(30.dp)
+                        imageVector = Icons.Outlined.Delete,
+                        contentDescription = "Delete Contact",
+                        modifier = Modifier.size(30.dp).clickable {
+                            scope.launch {
+                                contactDataStore.deleteContact(contact.id)
+                                navController.popBackStack()
+                            }
+                        }
                     )
                 }
             }

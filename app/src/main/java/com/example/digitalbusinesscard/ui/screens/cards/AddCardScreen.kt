@@ -29,6 +29,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -51,7 +53,7 @@ import com.example.digitalbusinesscard.ui.theme.BorderColor
 import kotlinx.coroutines.launch
 
 @Composable
-fun AddCardScreen(navController: NavController) {
+fun AddCardScreen(navController: NavController, cardId: String) {
     var cardType by remember { mutableStateOf("") }
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
@@ -65,8 +67,23 @@ fun AddCardScreen(navController: NavController) {
 
     val context = LocalContext.current
     val cardDataStore = remember { CardDataStore(context) }
+    val getCards by cardDataStore.getCards().collectAsState(initial = emptyList())
+    val card = getCards.find { it.id == cardId }
     val scope = rememberCoroutineScope()
 
+    LaunchedEffect(card) {
+        card?.let {
+            cardType = it.cardType ?: ""
+            firstName = it.firstName ?: ""
+            lastName = it.lastName ?: ""
+            email = it.email ?: ""
+            phone = it.phone ?: ""
+            job = it.job ?: ""
+            department = it.department ?: ""
+            company = it.company ?: ""
+            website = it.website ?: ""
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -86,7 +103,7 @@ fun AddCardScreen(navController: NavController) {
                     modifier = Modifier.size(30.dp).clickable { navController.popBackStack() }
                 )
                 Text(
-                    text = "Add new Card",
+                    text = if (card != null) "Edit Card" else "Add new Card",
                     style = MaterialTheme.typography.headlineMedium.copy(
                         fontWeight = FontWeight.W500,
                         textAlign = TextAlign.Center
@@ -179,7 +196,11 @@ fun AddCardScreen(navController: NavController) {
                                 company = company,
                                 website = website
                             )
-                            cardDataStore.saveCard(newCard)
+                            if (card != null) {
+                                cardDataStore.updateCard(newCard, card.id)
+                            } else {
+                                cardDataStore.saveCard(newCard)
+                            }
                             navController.popBackStack()
                         }
                     }

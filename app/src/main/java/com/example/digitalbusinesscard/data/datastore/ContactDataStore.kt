@@ -34,10 +34,10 @@ class ContactDataStore(private val context: Context) {
     }
 
     // Update existing contact
-    suspend fun updateContact(updated: Contact) {
+    suspend fun updateContact(updated: Contact, id: String) {
         context.contactDataStore.edit { prefs ->
             val list = parseJson(prefs[CONTACT_KEY])
-            val index = list.indexOfFirst { it.id == updated.id }
+            val index = list.indexOfFirst { it.id == id }
             if (index != -1) {
                 list[index] = updated
                 prefs[CONTACT_KEY] = gson.toJson(list)
