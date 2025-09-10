@@ -1,6 +1,5 @@
 package com.example.digitalbusinesscard.ui.screens.contacts
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -85,7 +84,6 @@ fun AddContactScreen(navController: NavController, contactId: String) {
             website = it.website ?: ""
         }
     }
-    Log.i("AddContactScreen", "Get contacts: $contact")
 
     Box(
         modifier = Modifier
@@ -109,7 +107,7 @@ fun AddContactScreen(navController: NavController, contactId: String) {
                         .clickable { navController.popBackStack() }
                 )
                 Text(
-                    text = "Edit Contact",
+                    text = if (contact != null) "Edit Contact" else "Add Contact",
                     style = MaterialTheme.typography.headlineMedium.copy(
                         fontWeight = FontWeight.W500,
                         textAlign = TextAlign.Center
@@ -205,11 +203,12 @@ fun AddContactScreen(navController: NavController, contactId: String) {
                                 company = company,
                                 website = website
                             )
-//                            contactDataStore.saveContact(newContact)
                             if (contact != null) {
-                                contactDataStore.deleteContact(contact.id)
+                                contactDataStore.updateContact(newContact, contact.id)
+                            } else {
+                                contactDataStore.saveContact(newContact)
                             }
-                            navController.popBackStack()
+                            navController.popBackStack("contacts", inclusive = false)
                         }
                     }
                 )

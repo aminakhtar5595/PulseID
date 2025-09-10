@@ -18,7 +18,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
-    NavHost(navController = navController, startDestination = Screen.Contacts.route, modifier = modifier) {
+    NavHost(navController = navController, startDestination = Screen.Splash.route, modifier = modifier) {
         composable(Screen.Splash.route) { SplashScreen() }
         composable(Screen.Menu.route) { MenuScreen() }
         composable(Screen.Premium.route) { PremiumScreen(navController) }
@@ -35,14 +35,18 @@ fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier)
             ContactInfoScreen(navController, contactId = contactId ?: "")
         }
         composable(Screen.Home.route) { CardScreen(navController) }
-        composable(Screen.AddCard.route) { AddCardScreen(navController) }
+        composable("${Screen.AddCard.route}/{cardId}"
+        ) { backStackEntry ->
+            val cardId = backStackEntry.arguments?.getString("cardId")
+            AddCardScreen(navController = navController, cardId = cardId ?: "")
+        }
     }
-//    LaunchedEffect(Unit) {
-//        delay(2000)
-//        navController.navigate("onboarding") {
-//            popUpTo("splash") { inclusive = true }
-//        }
-//    }
+    LaunchedEffect(Unit) {
+        delay(2000)
+        navController.navigate("onboarding") {
+            popUpTo("splash") { inclusive = true }
+        }
+    }
 }
 
 

@@ -34,10 +34,10 @@ class CardDataStore(private val context: Context) {
     }
 
     // Update existing card
-    suspend fun updateCard(updated: Card) {
+    suspend fun updateCard(updated: Card, id: String) {
         context.cardDataStore.edit { prefs ->
             val list = parseJson(prefs[CARDS_KEY])
-            val index = list.indexOfFirst { it.id == updated.id }
+            val index = list.indexOfFirst { it.id == id }
             if (index != -1) {
                 list[index] = updated
                 prefs[CARDS_KEY] = gson.toJson(list)
