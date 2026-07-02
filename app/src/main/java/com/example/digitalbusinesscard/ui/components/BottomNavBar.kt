@@ -27,6 +27,7 @@ import com.example.digitalbusinesscard.ui.theme.BackgroundColor
 import com.example.digitalbusinesscard.ui.theme.BorderColor
 import com.example.digitalbusinesscard.ui.theme.LightBlueColor
 
+/** Composable function that displays the bottom navigation bar with items for navigation. */
 @Composable
 fun BottomNavBar(navController: NavController) {
     val items = listOf(
